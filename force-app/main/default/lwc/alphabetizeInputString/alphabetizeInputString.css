@@ -1,0 +1,10 @@
+.border{
+    border-top: 1px solid gray;
+}
+
+.exampleHolder{
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}

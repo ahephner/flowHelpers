@@ -1,0 +1,37 @@
+<template>
+    <div class="slds-m-top_medium slds-m-bottom_x-large">
+        <template if:true={showSpin}>
+            <div class="exampleHolder">
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </div>
+        </template>
+        <template if:false={showSpin}>
+
+            <!-- Default/basic -->
+            <div class="slds-p-around_medium lgc-bg">
+                <lightning-input 
+                type="text" 
+                name="Label Name"
+                class='validate' 
+                label="Label" 
+                onchange={handleString} 
+                value={searchString} 
+                data-value="userInput" 
+                required></lightning-input>
+                <lightning-combobox
+                class='validate'
+                name="Category"
+                label="Category"
+                value={category}
+                options={categories}
+                onchange={handleCategory}
+                required></lightning-combobox>
+            </div>
+        </template>
+    </div>
+
+    <div class="slds-card__footer border">
+        <lightning-button variant="brand-outline" label="Previous" title="Primary action with lighter look" onclick={moveBack} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="brand" label="Next" title="Primary action" onclick={moveNext} class="slds-m-left_x-small"></lightning-button>
+    </div>
+</template>

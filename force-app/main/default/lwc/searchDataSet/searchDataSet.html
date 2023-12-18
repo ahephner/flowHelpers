@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-p-around_medium lgc-bg">
+        <lightning-input type="text" label="Search for products" onchange={handleSearch}></lightning-input>
+    </div>
+    <div class="outside slds-scrollable_y slds-p-left_medium slds-p-top_medium slds-p-right_medium lgc-bg" style="height:40rem;width:100%">
+        <template for:each={displayText} for:item="x">
+            <div key={x.Id}>
+                <div class="container">
+                    <lightning-button-icon-stateful icon-name="utility:check" 
+                                                    size="small" selected={x.checked}
+                                                    onclick={handleClick} name={x.Id}
+                                                    alternative-text="Like" class="slds-m-left_xx-small" data-button-number="04"></lightning-button-icon-stateful>
+                    <p class="slds-m-left_small">{x.Name}</p>
+                </div>
+            </div>
+        </template>
+        <div slot="footer">
+            <lightning-button 
+            variant="base"
+            label="Back" 
+            onclick={handleBack} 
+          ></lightning-button>
+            <lightning-button 
+              variant="base" 
+              label="Next" 
+              onclick={moveFoward} 
+            ></lightning-button>
+        </div>
+    </div>
+    </template>

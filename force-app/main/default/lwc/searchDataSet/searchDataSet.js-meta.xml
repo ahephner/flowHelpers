@@ -8,7 +8,7 @@
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
                <propertyType name="T" extends="SObject" label="Input Type" description="Generic sObject data type used for input sObject properties" />
-            <property name="inputValue" type="{T[]}" label="input value"  />
+            <property name="inputValue" type="{T[]}" label="input value" description='Required: Record Id and Name in collection' />
     
             <property name="selectedIds" type="String[]" label="recordIds back" description="Record Ids selected passed back here." />
         </targetConfig>

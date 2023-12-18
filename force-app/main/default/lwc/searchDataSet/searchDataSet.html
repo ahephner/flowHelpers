@@ -14,14 +14,16 @@
                 </div>
             </div>
         </template>
-        <div slot="footer">
+        <div class="slds-card__footer border">
             <lightning-button 
-            variant="base"
+            class="slds-m-left_x-small"
+            variant="brand-outline"
             label="Back" 
             onclick={handleBack} 
           ></lightning-button>
             <lightning-button 
-              variant="base" 
+              class="slds-m-left_x-small"
+              variant="success" 
               label="Next" 
               onclick={moveFoward} 
             ></lightning-button>

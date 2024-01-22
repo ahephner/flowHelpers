@@ -3,7 +3,9 @@ import {FlowNavigationBackEvent,
     FlowNavigationNextEvent, 
     FlowAttributeChangeEvent } from "lightning/flowSupport";
 export default class SearchDataSet extends LightningElement {
-    items;
+    items; 
+    label
+    
     @track displayText = []; 
     searchKey
     @api selectedIds = []; 
@@ -16,8 +18,15 @@ export default class SearchDataSet extends LightningElement {
         this.onStart();
     }
 
-
+    @api 
+    get labelString(){
+        return this.label || 'Search';
+    }
+    set labelString(data){
+        this.label = data; 
+    }
     async onStart(){
+        this.label = this.labelString.length > 0 || this.labelString != undefined ? this.labelString : 'Search Data'
         this.items = this.items.map(item=>{
             //css class
             let checked = false;

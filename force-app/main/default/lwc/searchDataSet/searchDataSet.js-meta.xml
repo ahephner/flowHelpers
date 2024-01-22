@@ -11,6 +11,7 @@
             <property name="inputValue" type="{T[]}" label="input value" description='Required: Record Id and Name in collection' />
     
             <property name="selectedIds" type="String[]" label="recordIds back" description="Record Ids selected passed back here." />
+            <property name="labelString" type="String" label='String over Search Bar' description='If the data set is searching Accounts put Account.'/> 
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

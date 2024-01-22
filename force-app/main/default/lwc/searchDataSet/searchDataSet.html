@@ -1,6 +1,6 @@
 <template>
     <div class="slds-p-around_medium lgc-bg">
-        <lightning-input type="text" label="Search for products" onchange={handleSearch}></lightning-input>
+        <lightning-input type="text" label={label} onchange={handleSearch}></lightning-input>
     </div>
     <div class="outside slds-scrollable_y slds-p-left_medium slds-p-top_medium slds-p-right_medium lgc-bg" style="height:40rem;width:100%">
         <template for:each={displayText} for:item="x">

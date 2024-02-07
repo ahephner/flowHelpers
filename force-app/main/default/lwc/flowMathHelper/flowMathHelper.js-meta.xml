@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+               <propertyType name="T" extends="SObject" label="Input Type" description="Generic sObject data type used for input sObject properties" />
+            <property name="inputValue" type="{T[]}" label="input value" description='Required: Full API Name of the grouping field' />
+            <property name='key' type='String' label='Key Value' description='The field name you want to group by. INCLUDE FULL API NAME'/>
+            <!-- <property name="selectedIds" type="String[]" label="recordIds back" description="Record Ids selected passed back here." />-->
+            <property name="keyValue" type="String" label='Grouping Field' description='Field API Name of the grouping field'/>
+            <property name="valueInput" type="String" label='Summary Field' description='Field API Name of the field you want grouped by'/> 
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

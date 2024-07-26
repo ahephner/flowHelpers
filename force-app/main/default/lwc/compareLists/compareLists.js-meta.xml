@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <propertyType name="T" extends="SObject" label="List One" description="Enter first list here" />
+            <property name="inputValueOne" type="{T[]}" label="List One Value" description="Required: Similar Value as list two" />
+            <propertyType name="A" extends="SObject" label="List Two" description="Enter second list here" />
+            <property name="inputValueTwo" type="{A[]}" label="List Two Value" description="Required: Similar Value as list one" />
+            <property name="colName" type="String" label="Enter what API name to match" description="Pass in API key name. Should match in both data sets" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

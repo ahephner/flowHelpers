@@ -1,0 +1,24 @@
+<template>
+    <div>
+        <h3>Unique in List One</h3>
+        <ul>
+            <template for:each={comparisonResult.uniqueInOne} for:item="item">
+                <li key={item.id}>{item.name}</li> <!-- Adjust the property as per your object structure -->
+            </template>
+        </ul>
+        
+        <h3>Unique in List Two</h3>
+        <ul>
+            <template for:each={comparisonResult.uniqueInTwo} for:item="item">
+                <li key={item.id}>{item.name}</li> <!-- Adjust the property as per your object structure -->
+            </template>
+        </ul>
+
+        <h3>Common Items</h3>
+        <ul>
+            <template for:each={comparisonResult.common} for:item="item">
+                <li key={item.id}>{item.name}</li> <!-- Adjust the property as per your object structure -->
+            </template>
+        </ul>
+    </div>
+</template>

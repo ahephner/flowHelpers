@@ -1,4 +1,5 @@
 public class omsPricingTool {
+    @AuraEnabled
     public static string pricebookFound(string pbId, list<CartItem> prods){
         string messBack;
         map<id, CartItem> product = new map<id, CartItem>();
@@ -7,9 +8,10 @@ public class omsPricingTool {
             for(CartItem x:prods){
                 product.put(x.Product2Id, x); 
             }
-            
+       
             for(pricebookentry a:[select id, UnitPrice, Product2Id from pricebookentry
                                   where Product2Id in: product.keySet() and Pricebook2Id =:pbId]){
+                                      system.debug(product.get(a.Product2Id).SalesPrice); 
                                       a.UnitPrice = product.get(a.Product2Id).SalesPrice;
                                       toUpsert.add(a);
                                       product.remove(a.Product2Id); 
@@ -20,20 +22,25 @@ public class omsPricingTool {
                     pricebookentry np = new pricebookentry();
                     np.Product2Id = product.get(y).Product2Id;
                     np.UnitPrice = product.get(y).SalesPrice;
+                    np.Pricebook2Id = pbId; 
                     np.IsActive = true; 
                     toUpsert.add(np); 
                 }
-                upsert toUpsert; 
-                messBack= 'success'; 
+                 
             }
+            upsert toUpsert; 
+            messBack= 'success';
         }catch(exception e){
             messBack = String.valueOf(e);
         }
         return messBack; 
     }
+    //Need to check if they are a member of the web store. If not add them
+    @AuraEnabled
     public static string createAllTheThings(string accountId, list<CartItem> products){
         string messBack;
         list<PricebookEntry> pbeList = new list<PricebookEntry>();
+        id storeId = [select id from webstore where name = 'ATS B2B Store'].id; 
         try{
          //get account details
          list<account> acc=[select id, name from account where id =: accountId ]; 
@@ -45,6 +52,7 @@ public class omsPricingTool {
                 PricebookEntry pbe = new PricebookEntry();
                 pbe.Product2Id = x.Product2Id;
                 pbe.UnitPrice = x.SalesPrice;
+                pbe.Pricebook2Id = pb.Id;
                 pbe.IsActive = true;
                 pbeList.add(pbe);
             }
@@ -58,7 +66,10 @@ public class omsPricingTool {
         //create buyer group price book set priority here
         BuyerGroupPricebook bgmpb = new BuyerGroupPricebook(IsActive=true, BuyerGroupId = bg.Id, Pricebook2Id = pb.Id, priority = 2 );
             insert bgmpb; 
-        messBack = 'success';
+        //create webstore access
+        WebStoreBuyerGroup webStore = new WebStoreBuyerGroup(BuyerGroupId=bg.Id, webStoreId = storeId);
+            insert webStore; 
+        messBack = 'New Price Book Created';
         }catch(exception e){
             messBack = string.valueOf(e);
         }

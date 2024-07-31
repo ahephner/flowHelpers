@@ -1,5 +1,9 @@
 <template>
     <div class="slds-scrollable" style="height:350px; min-height:350px;">
+        <div if:true={loading}>
+            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+        </div>
+        <div if:false={loading}>
         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" aria-label="Cart Items">
             <thead>
                 <tr class="slds-line-height_reset">
@@ -63,6 +67,7 @@
                 onclick={saveChanges}
                 variant="brand">
             </lightning-button>
+        </div>
         </div>
     </div>
 </template>

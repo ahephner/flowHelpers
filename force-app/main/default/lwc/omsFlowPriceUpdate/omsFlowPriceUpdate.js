@@ -16,6 +16,7 @@ export default class OmsFlowPriceUpdate extends LightningElement {
     wiredCartResult;
     account; 
     accBased; 
+    loading = true; 
     @api
     get shopCartId(){
         return this.cartId || '';
@@ -42,11 +43,12 @@ export default class OmsFlowPriceUpdate extends LightningElement {
             return mappedItem;
         });
         let books = await getPriceBooks({accountId: this.account})
+        console.log('books ', books)
         if(books.length>0){
             books = books.filter((x)=>x.Priority===2);
-            this.accBased = books[0].Pricebook2Id   
+            this.accBased = books.length ===1 ?  books[0].Pricebook2Id : false; 
         }
-
+        this.loading = false; 
     }
     
     // helper to calculate margin
@@ -118,31 +120,27 @@ export default class OmsFlowPriceUpdate extends LightningElement {
     // method to save changes using updateRecord, after successful update, it forces a window reload
     saveChanges() {
         console.log('Saving changes...');
-        const updates = this.cartItems.map(item => ({
-            fields: {
-                Id: item.Id,
-                SalesPrice: item.SalesPrice
-            }
-        }));
-        console.log('Updates to be sent:', JSON.stringify(updates, null, 2));
-
-        const updatePromises = updates.map(update => updateRecord(update));
-
-        Promise.all(updatePromises)
-            .then(() => {
-                console.log('All updates successful');
-                this.showSuccessToast('Changes saved successfully');
-                // Update local state to reflect saved changes
-                this.cartItems = this.cartItems.map(item => {
-                    console.log(`Updated item in local state: ${JSON.stringify(item, null, 2)}`);
-                    return {...item};
-                });
-            })
-            .catch(error => {
-                console.error('Error updating records:', error);
-                this.errorMsg = error.body ? error.body.message : error.message;
-                this.showErrorToast('Error saving changes');
-            });
+        this.loading = true; 
+        if(this.accBased){
+            HAS_PRICEBOOK({pbId: this.accBased ,prods:this.cartItems})
+                .then((res)=>{
+                    if(res==='success'){
+                        this.showSuccessToast(res)
+                    }else{
+                        this.showErrorToast(res);
+                    }
+                })
+        }else{
+            NO_PRICEBOOK({accountId: this.account, products: this.cartItems})
+                .then((res)=>{
+                    if(res==='New Price Book Created'){
+                        this.showSuccessToast(res)
+                    }else{
+                        this.showErrorToast(res);
+                    }
+                })
+        }
+        this.loading = false; 
     }
 
     refreshCartItems() {

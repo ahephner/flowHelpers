@@ -3,7 +3,7 @@ import { updateRecord } from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getPriceBooks from '@salesforce/apex/getPriceBooks.getPriceBookIds';
-import getCartItems from '@salesforce/apex/flowHelpers.getCartItems'; 
+import getCartItems from '@salesforce/apex/omsPricingTool.getCartItems'; 
 import HAS_PRICEBOOK from '@salesforce/apex/omsPricingTool.pricebookFound';
 import NO_PRICEBOOK from '@salesforce/apex/omsPricingTool.createAllTheThings';
 import { roundNum } from 'c/helper';
@@ -37,7 +37,8 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 ...item,
                 sObjectType: 'CartItem',
                 margin: this.calculateMargin(item.SalesPrice, item.Product2.Product_Cost__c),
-                readonly: item.Product2.Agency_Pricing__c
+                readonly: item.Product2.Agency_Pricing__c,
+                color: ''
             };
             this.account = data[0].Cart.AccountId; 
             return mappedItem;
@@ -61,6 +62,10 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         const margin = roundNum(((revenue - cost) / revenue) * 100, 2);
         console.log(`Calculated margin: ${margin}%`);
         return margin;
+    }
+
+    setStyle(item){
+        
     }
 
     // method to update price based off user input that will update margin put a setTimeOut on 

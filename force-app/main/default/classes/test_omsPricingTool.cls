@@ -83,7 +83,20 @@ public class test_omsPricingTool {
     }
 	@isTest
     static void test_pricebookFound(){
+        Pricebook2 accountPB = new Pricebook2(name='account base', isActive=true);
+        insert accountPB; 
         
+        product2 prod = [select id from Product2 where name='product'];
+        //pricebookentry 
+        PricebookEntry pbe = new PricebookEntry(IsActive = true, Product2Id=prod.id, Pricebook2Id= accountPB.Id, unitPrice = 1); 
+        insert pbe; 
+        
+        Id cart = [select id from WebCart where PoNumber = '123'].Id;
+        list<CartItem> cartItems = [Select product2Id, salesPrice from cartItem where cartId =: cart];
+        
+        test.startTest();
+        	omsPricingTool.pricebookFound(accountPB.Id, cartItems);
+        test.stopTest();
         
     }
     @isTest
@@ -96,6 +109,33 @@ public class test_omsPricingTool {
         test.startTest();
         	string foxtwo = omsPricingTool.createAllTheThings(accountName, prods);
         system.debug(foxtwo); 
+        test.stopTest();
+    }
+    @isTest
+    static void getCartItems(){
+        list<string> pbId = new list<string>();
+        Id cart = [select id from WebCart where PoNumber = '123'].Id; 
+        
+        
+        Pricebook2 accountPB = new Pricebook2(name='account base', isActive=true);
+        insert accountPB; 
+        
+        product2 prod = [select id from Product2 where name='product'];
+        product2 prod2 = [select id from Product2 where name='roundup'];
+        //pricebookentry 
+        PricebookEntry pbe = new PricebookEntry(IsActive = true, Product2Id=prod.id, Pricebook2Id= accountPB.Id, unitPrice = 1); 
+        insert pbe;
+                        //Standard pricebook entry        
+        PricebookEntry stpbe2 = new PricebookEntry(Pricebook2Id = accountPB.Id, Product2Id=prod2.id,
+                                                 unitprice=90, IsActive = True, UseStandardPrice=False);
+        insert stpbe2;
+        list<Pricebook2> pricebooks = [select id from pricebook2];
+        
+        for(pricebook2 x: pricebooks){
+            pbId.add(x.Id); 
+        }
+        test.startTest();
+        	omsPricingTool.cartWrapper items = omsPricingTool.getCartItems(cart, pbId); 
         test.stopTest();
     }
 }

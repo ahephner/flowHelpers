@@ -7,7 +7,7 @@ import getCartItems from '@salesforce/apex/omsPricingTool.getCartItems';
 import HAS_PRICEBOOK from '@salesforce/apex/omsPricingTool.pricebookFound';
 import NO_PRICEBOOK from '@salesforce/apex/omsPricingTool.createAllTheThings';
 import { roundNum } from 'c/helper';
-
+import { priorityPricing} from 'c/helperOMS';
 export default class OmsFlowPriceUpdate extends LightningElement {
     cartId; 
     cartItems = []; 
@@ -17,6 +17,7 @@ export default class OmsFlowPriceUpdate extends LightningElement {
     account; 
     accBased; 
     loading = true; 
+    helpText = `Price Book Legend: National = Purple, Customer = Green, Group = Orange, Corporate = Blue, Standard = Black`
     @api
     get shopCartId(){
         return this.cartId || '';
@@ -26,32 +27,82 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         this.cartId = data; 
         console.log('CartId set:', this.cartId);
     }
+
+    @api
+    get accountId(){
+        return this.account || '';
+    }
+
+    set accountId(data){
+        this.account = data; 
+        
+    }
     connectedCallback(){
         this.loadValues()
     }
+    allPriceBooks = []; 
     async loadValues(){
-        let data = await getCartItems({cId: this.cartId});
-        console.log('Data received:', JSON.stringify(data, null, 2));
-        this.cartItems = data.map(item => {
-            const mappedItem = {
-                ...item,
-                sObjectType: 'CartItem',
-                margin: this.calculateMargin(item.SalesPrice, item.Product2.Product_Cost__c),
-                readonly: item.Product2.Agency_Pricing__c,
-                color: ''
-            };
-            this.account = data[0].Cart.AccountId; 
-            return mappedItem;
-        });
+        //get avaliable price books
         let books = await getPriceBooks({accountId: this.account})
-        console.log('books ', books)
+        let pbInfo = await priorityPricing(books);
+        this.allPriceBooks = [...pbInfo.priceBookIdArray]; 
+        console.log(1,this.allPriceBooks)
+        let localPriceBookInfo = pbInfo.priceBooksObjArray; 
         if(books.length>0){
             books = books.filter((x)=>x.Priority===2);
             this.accBased = books.length ===1 ?  books[0].Pricebook2Id : false; 
         }
+
+        let data = await getCartItems({cId: this.cartId, priceBookIds: this.allPriceBooks});
+        let apexPB = data.priceentries; 
+        this.cartItems = data.items.map(item => {
+            let configs = this.itemPriority(item.Product2Id, apexPB, localPriceBookInfo, item.Product2.Agency_Pricing__c)
+            const mappedItem = {
+                ...item,
+                sObjectType: 'CartItem',
+                margin: this.calculateMargin(item.SalesPrice, item.Product2.Product_Cost__c),
+                readonly: configs.agency,
+                priority: configs.priority,
+                color:`color: ${configs.color}` 
+            };
+            return mappedItem;
+        });
+
+        console.log('cart items ', this.cartItems)
+        console.log('price book entires ', data.priceentries);
+        console.log('price books object ', localPriceBookInfo)
+       
         this.loading = false; 
     }
-    
+    //get priority of project
+    //1.mapped Item 2, pricebookentry array 3. pricebook array
+    //match cart item product2 with product2 id in pricebook array return pricebook id
+    //match returned pricebook id with id in price book array return priority
+    itemPriority(item, pbeArr,pbArr, agencyPriced ){
+        let pricebookid = pbeArr.find(x=> x.Product2Id === item).Pricebook2Id
+        
+        let priority = pbArr.find(x=>x.Pricebook2Id===pricebookid).Priority
+        let color; 
+        switch(priority){
+            case 1:
+                color ='darkmagenta';
+            break
+            case 2:
+                color = 'darkgreen';
+                break;
+            case 3:
+                color='orange';
+                break
+            case 4:
+                color='darkslateblue';
+                break;
+            default:
+                color='black'
+        }
+//don't let desk edit agency or corp books 
+        let agency = agencyPriced || priority === 4 ? true:false; 
+        return {priority, color, agency}
+    }
     // helper to calculate margin
     calculateMargin(revenue, cost) {
         console.log(`Calculating margin - Revenue: ${revenue}, Cost: ${cost}`);

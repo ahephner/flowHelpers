@@ -44,8 +44,8 @@ public class omsPricingTool {
         try{
          //get account details
          list<account> acc=[select id, name from account where id =: accountId ]; 
-        //create price book
-        Pricebook2 pb = new Pricebook2(name=acc[0].Name, isActive=true, Account_Based__c=true, Account_Based_Price_Book__c=true,Priority_Price_Book__c=true);
+        //create price book Account_Based__c=true, Priority_Price_Book__c=true
+        Pricebook2 pb = new Pricebook2(name=acc[0].Name, isActive=true,  Account_Based_Price_Book__c=true);
             insert pb; 
         //create price book entries
             for(CartItem x:products){
@@ -75,5 +75,31 @@ public class omsPricingTool {
         }
 
         return messBack;
+    }
+    
+        public with sharing class cartWrapper {
+        @AuraEnabled
+        public list<cartItem> items {get; set;}
+        @AuraEnabled 
+        public list<pricebookentry> priceentries {get; set;}
+        
+    }
+         @AuraEnabled(cacheable = true)
+    public static cartWrapper getCartItems(string cId, list<string> priceBookIds){
+        cartWrapper cw = new cartWrapper(); 
+        list<pricebookentry> pricebookEntries = new list<pricebookentry>();
+        list<CartItem> cartItems = [select id, Product2Id, name, SalesPrice, Product2.Product_Cost__c, Product2.Agency_Pricing__c, Cart.AccountId,
+                                    Product2.Floor_Price__c
+                                   from CartItem
+                                   where CartId =:cId];
+        for(cartItem x:cartItems){
+            list<pricebookentry> pbe = getPriceBooks.priorityBestPrice(priceBookIds, x.Product2Id);
+            system.debug(priceBookIds+' '+ x.Product2Id); 
+            system.debug('pbe '+pbe); 
+            pricebookEntries.add(pbe[0]);
+        }
+        cw.items = cartItems; 
+        cw.priceentries = pricebookEntries; 
+        return cw; 
     }
 }

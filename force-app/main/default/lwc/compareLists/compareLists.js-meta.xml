@@ -11,7 +11,9 @@
             <property name="inputValueOne" type="{T[]}" label="List One Value" description="Required: Similar Value as list two" />
             <propertyType name="A" extends="SObject" label="List Two" description="Enter second list here" />
             <property name="inputValueTwo" type="{A[]}" label="List Two Value" description="Required: Similar Value as list one" />
-            <property name="colName" type="String" label="Enter what API name to match" description="Pass in API key name. Should match in both data sets" />
+            <property name="fieldOne" type="String" label="Enter what API name to match" description="Pass in API key name. Should match in both data sets" />
+            <property name="fieldTwo" type="String" label="Enter what API name to match" description="Pass in API key name. Should match in both data sets" />
+            <property name="product2Ids" type="String[]" label="Product2 IDs" description="Output: List of Product2 IDs from the comparison" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

@@ -1,24 +1,35 @@
 <template>
-    <div>
-        <h3>Unique in List One</h3>
-        <ul>
-            <template for:each={comparisonResult.uniqueInOne} for:item="item">
-                <li key={item.id}>{item.name}</li> <!-- Adjust the property as per your object structure -->
-            </template>
-        </ul>
+    <div class="slds-box slds-theme_default">
+        <h2 class="slds-text-heading_medium slds-m-bottom_medium">List Comparison Results</h2>
         
-        <h3>Unique in List Two</h3>
-        <ul>
-            <template for:each={comparisonResult.uniqueInTwo} for:item="item">
-                <li key={item.id}>{item.name}</li> <!-- Adjust the property as per your object structure -->
-            </template>
-        </ul>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Unique in List One</h3>
+                <template for:each={comparisonResult.uniqueInOne} for:item="item">
+                    <p key={item.Id}>{item.Product_Name__c}</p>
+                </template>
+            </div>
+            
+            <div class="slds-col">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Unique in List Two</h3>
+                <template for:each={comparisonResult.uniqueInTwo} for:item="item">
+                    <p key={item.Id}>{item.Name}</p>
+                </template>
+            </div>
+            
+            <div class="slds-col">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Common Items</h3>
+                <template for:each={comparisonResult.common} for:item="item">
+                    <p key={item.Id}>{item.Product_Name__c}</p>
+                </template>
+            </div>
+        </div>
 
-        <h3>Common Items</h3>
-        <ul>
-            <template for:each={comparisonResult.common} for:item="item">
-                <li key={item.id}>{item.name}</li> <!-- Adjust the property as per your object structure -->
+        <div class="slds-m-top_medium">
+            <h3 class="slds-text-heading_small slds-m-bottom_small">Product2 IDs (Sent to Flow)</h3>
+            <template for:each={product2Ids} for:item="id">
+                <p key={id}>{id}</p>
             </template>
-        </ul>
+        </div>
     </div>
 </template>

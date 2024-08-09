@@ -4,11 +4,15 @@
             <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
         </div>
         <div if:false={loading}>
+            <lightning-helptext content={helpText}></lightning-helptext>
         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" aria-label="Cart Items">
             <thead>
                 <tr class="slds-line-height_reset">
                     <th class="" scope="col">
                         <div class="slds-truncate" title="Product">Product</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Sales Price">Floor Price</div>
                     </th>
                     <th class="" scope="col">
                         <div class="slds-truncate" title="Sales Price">Sales Price</div>
@@ -21,9 +25,14 @@
             <tbody>
                 <template for:each={cartItems} for:item="x">
                    <tr class="slds-hint-parent" key={x.Id}>
-                        <th data-label="Product Row" scope="row">
-                            {x.Name}    
+                        <th data-label="Product Row" scope="row" style={x.color}>
+                             <b>{x.Name}</b>    
                         </th>
+                        <td>
+                            <div class="slds-truncate" title="Sales Price">
+                                <p>${x.Product2.Floor_Price__c}</p>
+                            </div>
+                        </td>
                         <td>
                             <div class="slds-truncate" title="Sales Price">
                                 <lightning-input 

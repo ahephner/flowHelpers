@@ -94,13 +94,13 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 color='orange';
                 break
             case 4:
-                color='darkslateblue';
+                color='blue';
                 break;
             default:
                 color='black'
         }
 //don't let desk edit agency or corp books 
-        let agency = agencyPriced || priority === 4 ? true:false; 
+        let agency = agencyPriced ? true:false; 
         return {priority, color, agency}
     }
     // helper to calculate margin

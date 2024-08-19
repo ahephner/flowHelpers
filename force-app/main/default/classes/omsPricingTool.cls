@@ -37,7 +37,7 @@ public class omsPricingTool {
     }
     //Need to check if they are a member of the web store. If not add them
     @AuraEnabled
-    public static string createAllTheThings(string accountId, list<CartItem> products){
+    public static string createAllTheThings(string accountId, list<CartItem> products, string whoWillOwn){
         string messBack;
         list<PricebookEntry> pbeList = new list<PricebookEntry>();
         id storeId = [select id from webstore where name = 'ATS B2B Store'].id; 
@@ -45,7 +45,7 @@ public class omsPricingTool {
          //get account details
          list<account> acc=[select id, name from account where id =: accountId ]; 
         //create price book Account_Based__c=true, Priority_Price_Book__c=true
-        Pricebook2 pb = new Pricebook2(name=acc[0].Name, isActive=true,  Account_Based_Price_Book__c=true);
+        Pricebook2 pb = new Pricebook2(name=acc[0].Name, isActive=true,  Account_Based_Price_Book__c=true, Owner__c = whoWillOwn);
             insert pb; 
         //create price book entries
             for(CartItem x:products){

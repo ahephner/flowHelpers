@@ -13,6 +13,7 @@
             <property name="inputValueTwo" type="{A[]}" label="List Two Value" description="Required: Similar Value as list one" />
             <property name="fieldOne" type="String" label="Enter what API name to match" description="Pass in API key name. Should match in both data sets" />
             <property name="fieldTwo" type="String" label="Enter what API name to match" description="Pass in API key name. Should match in both data sets" />
+            <property name="showRes" type="String" label="Show Screen" description="Type to see screen put yes. To skip screen put no" />
             <property name="product2Ids" type="String[]" label="Product2 IDs" description="Output: List of Product2 IDs from the comparison" />
         </targetConfig>
     </targetConfigs>

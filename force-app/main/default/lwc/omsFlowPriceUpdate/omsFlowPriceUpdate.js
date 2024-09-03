@@ -8,6 +8,7 @@ import HAS_PRICEBOOK from '@salesforce/apex/omsPricingTool.pricebookFound';
 import NO_PRICEBOOK from '@salesforce/apex/omsPricingTool.createAllTheThings';
 import { roundNum } from 'c/helper';
 import { priorityPricing} from 'c/helperOMS';
+const regExp = /[a-zA-Z]/g;
 export default class OmsFlowPriceUpdate extends LightningElement {
     cartId; 
     cartItems = []; 
@@ -16,6 +17,8 @@ export default class OmsFlowPriceUpdate extends LightningElement {
     wiredCartResult;
     account; 
     accBased;
+    //check if the price book name has the account name using the regex above. 
+    updatePBName;
     //owner of the account. We need this so that we can set the owner record on the price book object so if the counter creates the price book the rep has access to edit at a later date.  
     ownerId; 
     loading = true; 
@@ -59,11 +62,16 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         let books = await getPriceBooks({accountId: this.account})
         let pbInfo = await priorityPricing(books);
         this.allPriceBooks = [...pbInfo.priceBookIdArray]; 
-        console.log(1,this.allPriceBooks)
+        
         let localPriceBookInfo = pbInfo.priceBooksObjArray; 
         if(books.length>0){
             books = books.filter((x)=>x.Priority===2);
             this.accBased = books.length ===1 ?  books[0].Pricebook2Id : false; 
+            //check if the price book name only has numbers no name
+            if(this.accBased && !regExp.test(books[0].Pricebook2.Name)){
+                this.updatePBName = books[0].BuyerGroup.Name;
+                
+            }
         }
 
         let data = await getCartItems({cId: this.cartId, priceBookIds: this.allPriceBooks});
@@ -116,7 +124,7 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 color='black'
         }
 //don't let desk edit agency or corp books 
-        let agency = agencyPriced || priority === 1 ? true:false; 
+        let agency = agencyPriced || priority === 1 || priority === 3 ? true:false; 
         return {priority, color, agency, costDown}
     }
     // helper to calculate margin
@@ -195,7 +203,8 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         let productsToSave = [...this.cartItems.filter(x=> x.readonly === false)]
         this.loading = true; 
         if(this.accBased){
-            HAS_PRICEBOOK({pbId: this.accBased ,prods:productsToSave})
+            console.log(1.1, this.updatePBName)
+            HAS_PRICEBOOK({pbId: this.accBased ,prods:productsToSave, pbName:this.updatePBName})
                 .then((res)=>{
                     if(res==='success'){
                         this.showSuccessToast(res)

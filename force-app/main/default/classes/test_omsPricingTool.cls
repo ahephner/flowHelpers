@@ -3,6 +3,26 @@ public class test_omsPricingTool {
     @TestSetup static void setUp(){
          DateTime dt = DateTime.newInstance(2025, 5, 15, 12, 30, 0);
         
+        //create user
+        // Define the user profile
+		Profile p = [SELECT Id FROM Profile WHERE Name='Standard User' LIMIT 1];
+
+		// Create the user
+		User newUser = new User(
+    							FirstName = 'Test',
+    							LastName = 'User',
+    							Alias = 'tuser',
+    							Email = 'alexabbyhephner@example.com',
+    							Username = 'alexabbyhephner@example.com',  // Username should be in the form of an email
+    							EmailEncodingKey = 'UTF-8',
+    							LanguageLocaleKey = 'en_US',
+    							LocaleSidKey = 'en_US',
+    							TimeZoneSidKey = 'America/Los_Angeles',
+    							ProfileId = p.Id
+								);
+
+								insert newUser;
+        
         //create test customer
         Account cust = new Account();
         cust.Name = 'Test123456';
@@ -83,7 +103,7 @@ public class test_omsPricingTool {
     }
 	@isTest
     static void test_pricebookFound(){
-        Pricebook2 accountPB = new Pricebook2(name='account base', isActive=true);
+        Pricebook2 accountPB = new Pricebook2(name='1001', isActive=true);
         insert accountPB; 
         
         product2 prod = [select id from Product2 where name='product'];
@@ -95,7 +115,7 @@ public class test_omsPricingTool {
         list<CartItem> cartItems = [Select product2Id, salesPrice from cartItem where cartId =: cart];
         
         test.startTest();
-        	omsPricingTool.pricebookFound(accountPB.Id, cartItems);
+        	omsPricingTool.pricebookFound(accountPB.Id, cartItems, '1001-test');
         test.stopTest();
         
     }
@@ -103,11 +123,11 @@ public class test_omsPricingTool {
     static void createAllTheThings(){
         list<account> acc = [select id, name from account where name='Test123456'];
         string accountName = acc[0].Id; 
-        
+        id userId = [select id from user where Username = 'alexabbyhephner@example.com'].Id;
         Id cart = [select id from WebCart where PoNumber = '123'].Id; 
         list<CartItem> prods = [Select product2Id, salesPrice from cartItem where cartId =: cart];
         test.startTest();
-        	string foxtwo = omsPricingTool.createAllTheThings(accountName, prods);
+        	string foxtwo = omsPricingTool.createAllTheThings(accountName, prods, userId);
         system.debug(foxtwo); 
         test.stopTest();
     }

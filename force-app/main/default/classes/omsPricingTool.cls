@@ -1,7 +1,9 @@
 public class omsPricingTool {
     @AuraEnabled
-    public static string pricebookFound(string pbId, list<CartItem> prods){
+    public static string pricebookFound(string pbId, list<CartItem> prods, string pbName){
         string messBack;
+        string newName = pbName; 
+      
         map<id, CartItem> product = new map<id, CartItem>();
         list<pricebookentry> toUpsert = new list<pricebookentry>(); 
         try{
@@ -28,7 +30,12 @@ public class omsPricingTool {
                 }
                  
             }
-            upsert toUpsert; 
+            upsert toUpsert;
+            if(!String.isBlank(newName)){
+                 list<Pricebook2> pb = [select id, name from Pricebook2 where id =: pbId];
+                pb[0].Name = newName; 
+                update pb; 
+            }
             messBack= 'success';
         }catch(exception e){
             messBack = String.valueOf(e);

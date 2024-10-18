@@ -1,0 +1,48 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+      <div slot="title">
+          Customer Sales History
+      </div>
+      <!-- <div slot="actions">
+    
+      </div>
+ -->
+      <div class="slds-grid slds-wrap">
+        <!-- Card Body  -->
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-input 
+              type="date" 
+              name="input1" 
+              label="Date 1"
+              onchange={dateOne} 
+            ></lightning-input>
+        </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input 
+                type="date" 
+                name="input1" 
+                label="Date 2" 
+                onchange={dateTwo}
+              ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-combobox 
+                  name="families"
+                  label="Manufacture"
+                  value={familyPicked}
+                  placeholder='All'
+                  options={famOpts}
+                  onchange={handleFamily}
+                ></lightning-combobox>
+            </div>
+      </div>
+
+      <div slot="footer">
+        <lightning-button 
+          variant="success"
+          label="Run Apex" 
+          onclick={handleClick} 
+        ></lightning-button>
+      </div>
+    </lightning-card>
+</template>

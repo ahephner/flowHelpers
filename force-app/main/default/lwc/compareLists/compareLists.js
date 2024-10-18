@@ -1,11 +1,12 @@
 import { LightningElement, api, track } from 'lwc';
-import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
+import { FlowAttributeChangeEvent, FlowNavigationNextEvent } from 'lightning/flowSupport';
 
 export default class CompareLists extends LightningElement {
     listOne;
     listTwo;
     mf1;
     mf2;
+    finished = false; 
     @track comparisonResult;
     @api product2Ids = [];
 
@@ -16,7 +17,7 @@ export default class CompareLists extends LightningElement {
     set inputValueOne(data) {
         this.listOne = data;
         console.log('List One populated:', JSON.stringify(this.listOne));
-        this.compareListsInOne();
+        //this.compareListsInOne();
     }
 
     @api
@@ -29,7 +30,7 @@ export default class CompareLists extends LightningElement {
         this.listTwo.forEach((item, index) => {
             console.log(`List Two Item ${index}:`, JSON.stringify(item));
         });
-        this.compareListsInOne();
+        //this.compareListsInOne();
     }
 
     @api
@@ -39,7 +40,7 @@ export default class CompareLists extends LightningElement {
     set fieldOne(data) {
         this.mf1 = data;
         console.log('Match Fields One set:', JSON.stringify(this.mf1));
-        this.compareListsInOne();
+        //this.compareListsInOne();
     }
 
     @api
@@ -49,9 +50,26 @@ export default class CompareLists extends LightningElement {
     set fieldTwo(data) {
         this.mf2 = data;
         console.log('Match Fields Two set:', JSON.stringify(this.mf2));
-        this.compareListsInOne();
+        //this.compareListsInOne();
     }
 
+    showScreen
+    @api
+    get showRes() {
+        return this.showScreen; 
+    }
+    set showRes(data) {
+        this.showScreen = data === 'no'? false: true; 
+        this.compareListsInOne();
+    }
+    renderedCallback(){
+        if(this.finished){
+            console.log('please just move');
+            
+            const navigateNextEvent = new FlowNavigationNextEvent();
+            this.dispatchEvent(navigateNextEvent);
+        }
+    }
     compareListsInOne() {
         console.log('compareListsInOne called');
         console.log('List One:', JSON.stringify(this.listOne));
@@ -93,17 +111,31 @@ export default class CompareLists extends LightningElement {
 
         this.extractProduct2Ids(this.comparisonResult);
         console.log('Product2Ids:', JSON.stringify(this.product2Ids)); // New console log
+        console.log('showScreen:', this.showScreen); // New console log
         this.dispatchFlowAttributeChangeEvent(this.product2Ids);
+        this.finished = true; 
+        
+
     }
 
+    movePlease(){
+    // check if NEXT is allowed on this screen
+            if(!this.showScreen) {
+            console.log('trying to go');
+                    
+                const navigateNextEvent = new FlowNavigationNextEvent();
+                this.dispatchEvent(navigateNextEvent);
+            }
+    }
     extractProduct2Ids(comparisonResult) {
         const allItems = [
             ...comparisonResult.uniqueInOne,
             ...comparisonResult.uniqueInTwo,
             ...comparisonResult.common
         ];
-        this.product2Ids = allItems.map(item => item.Product__c).filter(Boolean);
-        console.log('Extracted Product2Ids:', JSON.stringify(this.product2Ids)); // New console log
+//HERE is where we can tell it what values to pass back to the flow. Need to see if I could let the user pass in a value on the set up screen 
+        //this.product2Ids = allItems.map(item => item.Product__c).filter(Boolean);
+        this.product2Ids = comparisonResult.common.map(item => item.Product_Code__c).filter(Boolean);
         return this.product2Ids;
     }
 

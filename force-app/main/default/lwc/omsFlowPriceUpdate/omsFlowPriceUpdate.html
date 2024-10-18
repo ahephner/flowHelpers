@@ -27,6 +27,9 @@
                    <tr class="slds-hint-parent" key={x.Id}>
                         <th data-label="Product Row" scope="row" style={x.color}>
                              <b>{x.Name}</b>    
+                             <template if:true={x.costDown}>
+                                <lightning-helptext content={costHelpText}></lightning-helptext>
+                             </template>
                         </th>
                         <td>
                             <div class="slds-truncate" title="Sales Price">

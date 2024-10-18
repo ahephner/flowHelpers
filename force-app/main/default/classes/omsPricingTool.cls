@@ -1,7 +1,9 @@
 public class omsPricingTool {
     @AuraEnabled
-    public static string pricebookFound(string pbId, list<CartItem> prods){
+    public static string pricebookFound(string pbId, list<CartItem> prods, string pbName){
         string messBack;
+        string newName = pbName; 
+      
         map<id, CartItem> product = new map<id, CartItem>();
         list<pricebookentry> toUpsert = new list<pricebookentry>(); 
         try{
@@ -28,7 +30,12 @@ public class omsPricingTool {
                 }
                  
             }
-            upsert toUpsert; 
+            upsert toUpsert;
+            if(!String.isBlank(newName)){
+                 list<Pricebook2> pb = [select id, name from Pricebook2 where id =: pbId];
+                pb[0].Name = newName; 
+                update pb; 
+            }
             messBack= 'success';
         }catch(exception e){
             messBack = String.valueOf(e);
@@ -37,7 +44,7 @@ public class omsPricingTool {
     }
     //Need to check if they are a member of the web store. If not add them
     @AuraEnabled
-    public static string createAllTheThings(string accountId, list<CartItem> products){
+    public static string createAllTheThings(string accountId, list<CartItem> products, string whoWillOwn){
         string messBack;
         list<PricebookEntry> pbeList = new list<PricebookEntry>();
         id storeId = [select id from webstore where name = 'ATS B2B Store'].id; 
@@ -45,7 +52,7 @@ public class omsPricingTool {
          //get account details
          list<account> acc=[select id, name from account where id =: accountId ]; 
         //create price book Account_Based__c=true, Priority_Price_Book__c=true
-        Pricebook2 pb = new Pricebook2(name=acc[0].Name, isActive=true,  Account_Based_Price_Book__c=true);
+        Pricebook2 pb = new Pricebook2(name=acc[0].Name, isActive=true,  Account_Based_Price_Book__c=true, Owner__c = whoWillOwn);
             insert pb; 
         //create price book entries
             for(CartItem x:products){

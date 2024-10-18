@@ -8,6 +8,7 @@ import HAS_PRICEBOOK from '@salesforce/apex/omsPricingTool.pricebookFound';
 import NO_PRICEBOOK from '@salesforce/apex/omsPricingTool.createAllTheThings';
 import { roundNum } from 'c/helper';
 import { priorityPricing} from 'c/helperOMS';
+const regExp = /[a-zA-Z]/g;
 export default class OmsFlowPriceUpdate extends LightningElement {
     cartId; 
     cartItems = []; 
@@ -15,9 +16,14 @@ export default class OmsFlowPriceUpdate extends LightningElement {
     noBooks; 
     wiredCartResult;
     account; 
-    accBased; 
+    accBased;
+    //check if the price book name has the account name using the regex above. 
+    updatePBName;
+    //owner of the account. We need this so that we can set the owner record on the price book object so if the counter creates the price book the rep has access to edit at a later date.  
+    ownerId; 
     loading = true; 
     helpText = `Price Book Legend: National = Purple, Customer = Green, Group = Orange, Corporate = Blue, Standard = Black`
+    costHelpText=`Last Paid Price don't change`; 
     @api
     get shopCartId(){
         return this.cartId || '';
@@ -37,6 +43,16 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         this.account = data; 
         
     }
+
+    @api
+    get accountOwnerId(){
+        return this.ownerId || '';
+    }
+
+    set accountOwnerId(data){
+        this.ownerId = data; 
+        
+    }
     connectedCallback(){
         this.loadValues()
     }
@@ -46,15 +62,21 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         let books = await getPriceBooks({accountId: this.account})
         let pbInfo = await priorityPricing(books);
         this.allPriceBooks = [...pbInfo.priceBookIdArray]; 
-        console.log(1,this.allPriceBooks)
+        
         let localPriceBookInfo = pbInfo.priceBooksObjArray; 
         if(books.length>0){
             books = books.filter((x)=>x.Priority===2);
             this.accBased = books.length ===1 ?  books[0].Pricebook2Id : false; 
+            //check if the price book name only has numbers no name
+            if(this.accBased && !regExp.test(books[0].Pricebook2.Name)){
+                this.updatePBName = books[0].BuyerGroup.Name;
+                
+            }
         }
 
         let data = await getCartItems({cId: this.cartId, priceBookIds: this.allPriceBooks});
         let apexPB = data.priceentries; 
+
         this.cartItems = data.items.map(item => {
             let configs = this.itemPriority(item.Product2Id, apexPB, localPriceBookInfo, item.Product2.Agency_Pricing__c)
             const mappedItem = {
@@ -63,6 +85,7 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 margin: this.calculateMargin(item.SalesPrice, item.Product2.Product_Cost__c),
                 readonly: configs.agency,
                 priority: configs.priority,
+                costDown: configs.costDown, 
                 color:`color: ${configs.color}` 
             };
             return mappedItem;
@@ -79,9 +102,10 @@ export default class OmsFlowPriceUpdate extends LightningElement {
     //match cart item product2 with product2 id in pricebook array return pricebook id
     //match returned pricebook id with id in price book array return priority
     itemPriority(item, pbeArr,pbArr, agencyPriced ){
-        let pricebookid = pbeArr.find(x=> x.Product2Id === item).Pricebook2Id
+        let pricebookid = pbeArr.find(x=> x.Product2Id === item)
         
-        let priority = pbArr.find(x=>x.Pricebook2Id===pricebookid).Priority
+        let costDown = pricebookid.Cost_Has_Decreased__c
+        let priority = pbArr.find(x=>x.Pricebook2Id===pricebookid.Pricebook2Id).Priority
         let color; 
         switch(priority){
             case 1:
@@ -94,14 +118,14 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 color='orange';
                 break
             case 4:
-                color='darkslateblue';
+                color='blue';
                 break;
             default:
                 color='black'
         }
 //don't let desk edit agency or corp books 
-        let agency = agencyPriced || priority === 4 ? true:false; 
-        return {priority, color, agency}
+        let agency = agencyPriced || priority === 1 || priority === 3 ? true:false; 
+        return {priority, color, agency, costDown}
     }
     // helper to calculate margin
     calculateMargin(revenue, cost) {
@@ -158,14 +182,14 @@ export default class OmsFlowPriceUpdate extends LightningElement {
     
         // Set a new timeout
         this.updateMarginTimeout = setTimeout(() => {
-            console.log(`Updating margin after timeout - ID: ${id}, New Value: ${value}`);
+            //console.log(`Updating margin after timeout - ID: ${id}, New Value: ${value}`);
             const updatedItem = this.cartItems.find(item => item.Id === id);
             if (updatedItem) {
                 const newMargin = parseFloat(value) / 100; // Convert percentage to decimal
                 const cost = updatedItem.Product2.Product_Cost__c;
                 updatedItem.SalesPrice = roundNum(cost / (1 - newMargin), 2);
                 updatedItem.margin = parseFloat(value);
-                console.log(`Updated item after margin change: ${JSON.stringify(updatedItem, null, 2)}`);
+                //console.log(`Updated item after margin change: ${JSON.stringify(updatedItem, null, 2)}`);
                 this.cartItems = [...this.cartItems];
             } else {
                 console.warn(`Item with ID ${id} not found`);
@@ -175,10 +199,12 @@ export default class OmsFlowPriceUpdate extends LightningElement {
 
     // method to save changes using updateRecord, after successful update, it forces a window reload
     saveChanges() {
-        console.log('Saving changes...');
+        console.log('Saving changes...', this.cartItems);
+        let productsToSave = [...this.cartItems.filter(x=> x.readonly === false)]
         this.loading = true; 
         if(this.accBased){
-            HAS_PRICEBOOK({pbId: this.accBased ,prods:this.cartItems})
+            console.log(1.1, this.updatePBName)
+            HAS_PRICEBOOK({pbId: this.accBased ,prods:productsToSave, pbName:this.updatePBName})
                 .then((res)=>{
                     if(res==='success'){
                         this.showSuccessToast(res)
@@ -187,7 +213,7 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                     }
                 })
         }else{
-            NO_PRICEBOOK({accountId: this.account, products: this.cartItems})
+            NO_PRICEBOOK({accountId: this.account, products: productsToSave, whoWillOwn: this.ownerId})
                 .then((res)=>{
                     if(res==='New Price Book Created'){
                         this.showSuccessToast(res)

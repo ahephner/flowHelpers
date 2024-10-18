@@ -1,5 +1,6 @@
 <template>
     <div class="slds-box slds-theme_default">
+        <template if:true={showScreen}>
         <h2 class="slds-text-heading_medium slds-m-bottom_medium">List Comparison Results</h2>
         
         <div class="slds-grid slds-gutters">
@@ -31,5 +32,13 @@
                 <p key={id}>{id}</p>
             </template>
         </div>
+    </template>
+    <template if:false={showScreen}>
+        <lightning-button 
+          variant="base"
+          label="Button Label" 
+          onclick={movePlease} 
+        ></lightning-button>
+    </template>
     </div>
 </template>

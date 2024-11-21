@@ -11,9 +11,10 @@ public class omsPricingTool {
                 product.put(x.Product2Id, x); 
             }
        
-            for(pricebookentry a:[select id, UnitPrice, Product2Id from pricebookentry
+            for(pricebookentry a:[select id, UnitPrice,Hold_Margin__c, Product2Id from pricebookentry
                                   where Product2Id in: product.keySet() and Pricebook2Id =:pbId]){
-                                      system.debug(product.get(a.Product2Id).SalesPrice); 
+                      				  a.Hold_Margin__c = product.get(a.Product2Id).Hold_Margin__c; 
+                                      system.debug('SP '+product.get(a.Product2Id).SalesPrice);
                                       a.UnitPrice = product.get(a.Product2Id).SalesPrice;
                                       toUpsert.add(a);
                                       product.remove(a.Product2Id); 
@@ -24,6 +25,7 @@ public class omsPricingTool {
                     pricebookentry np = new pricebookentry();
                     np.Product2Id = product.get(y).Product2Id;
                     np.UnitPrice = product.get(y).SalesPrice;
+                    np.Hold_Margin__c = product.get(y).Hold_Margin__c; 
                     np.Pricebook2Id = pbId; 
                     np.IsActive = true; 
                     toUpsert.add(np); 
@@ -59,6 +61,7 @@ public class omsPricingTool {
                 PricebookEntry pbe = new PricebookEntry();
                 pbe.Product2Id = x.Product2Id;
                 pbe.UnitPrice = x.SalesPrice;
+                pbe.Hold_Margin__c = x.Hold_Margin__c; 
                 pbe.Pricebook2Id = pb.Id;
                 pbe.IsActive = true;
                 pbeList.add(pbe);
@@ -101,8 +104,6 @@ public class omsPricingTool {
                                    where CartId =:cId];
         for(cartItem x:cartItems){
             list<pricebookentry> pbe = getPriceBooks.priorityBestPrice(priceBookIds, x.Product2Id);
-            system.debug(priceBookIds+' '+ x.Product2Id); 
-            system.debug('pbe '+pbe); 
             pricebookEntries.add(pbe[0]);
         }
         cw.items = cartItems; 

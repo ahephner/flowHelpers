@@ -12,13 +12,16 @@
                         <div class="slds-truncate" title="Product">Product</div>
                     </th>
                     <th class="" scope="col">
-                        <div class="slds-truncate" title="Sales Price">Floor Price</div>
+                        <div class="slds-truncate" title="Floor Price">Floor Price</div>
                     </th>
                     <th class="" scope="col">
                         <div class="slds-truncate" title="Sales Price">Sales Price</div>
                     </th>
                     <th class="" scope="col">
                         <div class="slds-truncate" title="Margin">Margin (%)</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Hold M">Hold Margin</div>
                     </th>
                 </tr>
             </thead>
@@ -69,6 +72,14 @@
                                 </template>
                             </div>
                         </td>
+                        <td>
+                            <div class="slds-truncate" title="Margin">
+                                <template if:false={x.readonly}>
+                                    <lightning-input type="checkbox" name={x.Id} onchange={handleCheck} 
+                                    checked={x.Hold_Margin__c}></lightning-input>
+                                </template>
+                                </div>
+                            </td>
                    </tr>
                 </template>   
             </tbody>

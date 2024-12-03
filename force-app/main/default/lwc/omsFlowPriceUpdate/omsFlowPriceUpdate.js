@@ -66,10 +66,10 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         let localPriceBookInfo = pbInfo.priceBooksObjArray; 
         if(books.length>0){
             books = books.filter((x)=>x.Priority===2);
-            this.accBased = books.length ===1 ?  books[0].Pricebook2Id : false; 
+            this.accBased = books.length ===1 ?  books[0].Pricebook2Id : ''; 
             //check if the price book name only has numbers no name
-            if(this.accBased && !regExp.test(books[0].Pricebook2.Name)){
-                this.updatePBName = books[0].BuyerGroup.Name;
+            if(this.accBased.length>0 && regExp.test(books[0].Pricebook2.Name)===false){
+                 this.updatePBName = books[0].BuyerGroup.Name;
                 
             }
         }
@@ -86,7 +86,9 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 readonly: configs.agency,
                 priority: configs.priority,
                 costDown: configs.costDown, 
-                color:`color: ${configs.color}` 
+                color:`color: ${configs.color}`, 
+                Hold_Margin__c: configs.holdMargin,
+                Product_Cost__c: configs.cost
             };
             return mappedItem;
         });
@@ -105,7 +107,9 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         let pricebookid = pbeArr.find(x=> x.Product2Id === item)
         
         let costDown = pricebookid.Cost_Has_Decreased__c
-        let priority = pbArr.find(x=>x.Pricebook2Id===pricebookid.Pricebook2Id).Priority
+        let priority = pbArr.find(x=>x.Pricebook2Id===pricebookid.Pricebook2Id).Priority;
+        let holdMargin = pricebookid.Hold_Margin__c?true:false;
+        let cost = pricebookid.Product_Cost__c;
         let color; 
         switch(priority){
             case 1:
@@ -125,7 +129,7 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         }
 //don't let desk edit agency or corp books 
         let agency = agencyPriced || priority === 1 || priority === 3 ? true:false; 
-        return {priority, color, agency, costDown}
+        return {priority, color, agency, costDown, holdMargin, cost}
     }
     // helper to calculate margin
     calculateMargin(revenue, cost) {
@@ -195,6 +199,11 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 console.warn(`Item with ID ${id} not found`);
             }
         }, 500); // 500 milliseconds = 0.5 seconds
+    }
+    //checkbox
+    handleCheck(evt){
+        let index = this.cartItems.findIndex(x => x.Id === evt.target.name);
+        this.cartItems[index].Hold_Margin__c = evt.target.checked; 
     }
 
     // method to save changes using updateRecord, after successful update, it forces a window reload

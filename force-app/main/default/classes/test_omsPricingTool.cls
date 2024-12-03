@@ -60,11 +60,11 @@ public class test_omsPricingTool {
         insert cdg; 
         //Product
         product2 prod = new product2(name ='product', IsActive= True, ProductCode='123', Product_Status__c ='Stock', 
-                                    Subcategory__c='Chemicals-Herbicide', Product_Family__c='FMC', Floor_Type__c ='Floor', Floor_Price__c = 1); 
+                                    Subcategory__c='Fungicide', Product_Family__c='FMC', Floor_Type__c ='Floor', Floor_Price__c = 1); 
         insert prod;
                 //Product
         product2 prod2 = new product2(name ='roundup', IsActive= True, ProductCode='456', Product_Status__c ='Stock', 
-                                    Subcategory__c='Chemicals-Herbicide', Product_Family__c='FMC', Floor_Type__c ='Floor', Floor_Price__c = 1); 
+                                    Subcategory__c='Fungicide', Product_Family__c='FMC', Floor_Type__c ='Floor', Floor_Price__c = 1); 
         insert prod2;
         //CartItem List
         List<CartItem> cartItems = new List<CartItem>();
@@ -76,6 +76,7 @@ public class test_omsPricingTool {
                                        Quantity = 1.00, SalesPrice = i,
                                        Sku = 'AJ '+i, TotalPriceAfterAllAdjustments = i,
            							   TotalPrice =i, UnitAdjustedPrice = 0, 
+                                       Hold_Margin__c = true,
 										UnitAdjustmentAmount=0, Product2Id=prod.id,
                                        CartDeliveryGroupId = cdg.id);
             if(i==0){
@@ -112,7 +113,7 @@ public class test_omsPricingTool {
         insert pbe; 
         
         Id cart = [select id from WebCart where PoNumber = '123'].Id;
-        list<CartItem> cartItems = [Select product2Id, salesPrice from cartItem where cartId =: cart];
+        list<CartItem> cartItems = [Select product2Id, salesPrice, Hold_Margin__c from cartItem where cartId =: cart];
         
         test.startTest();
         	omsPricingTool.pricebookFound(accountPB.Id, cartItems, '1001-test');
@@ -125,7 +126,7 @@ public class test_omsPricingTool {
         string accountName = acc[0].Id; 
         id userId = [select id from user where Username = 'alexabbyhephner@example.com'].Id;
         Id cart = [select id from WebCart where PoNumber = '123'].Id; 
-        list<CartItem> prods = [Select product2Id, salesPrice from cartItem where cartId =: cart];
+        list<CartItem> prods = [Select product2Id, salesPrice, Hold_Margin__c from cartItem where cartId =: cart];
         test.startTest();
         	string foxtwo = omsPricingTool.createAllTheThings(accountName, prods, userId);
         system.debug(foxtwo); 

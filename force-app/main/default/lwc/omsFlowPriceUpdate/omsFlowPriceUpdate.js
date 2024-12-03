@@ -87,7 +87,8 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 priority: configs.priority,
                 costDown: configs.costDown, 
                 color:`color: ${configs.color}`, 
-                Hold_Margin__c: configs.holdMargin
+                Hold_Margin__c: configs.holdMargin,
+                Product_Cost__c: configs.cost
             };
             return mappedItem;
         });
@@ -107,7 +108,8 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         
         let costDown = pricebookid.Cost_Has_Decreased__c
         let priority = pbArr.find(x=>x.Pricebook2Id===pricebookid.Pricebook2Id).Priority;
-        let holdMargin = pbeArr.find(x=>x.Pricebook2Id===pricebookid.Pricebook2Id).Hold_Margin__c?true:false;
+        let holdMargin = pricebookid.Hold_Margin__c?true:false;
+        let cost = pricebookid.Product_Cost__c;
         let color; 
         switch(priority){
             case 1:
@@ -127,7 +129,7 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         }
 //don't let desk edit agency or corp books 
         let agency = agencyPriced || priority === 1 || priority === 3 ? true:false; 
-        return {priority, color, agency, costDown, holdMargin}
+        return {priority, color, agency, costDown, holdMargin, cost}
     }
     // helper to calculate margin
     calculateMargin(revenue, cost) {

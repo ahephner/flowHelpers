@@ -23,6 +23,9 @@
                     <th class="" scope="col">
                         <div class="slds-truncate" title="Hold M">Hold Margin</div>
                     </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Hold M">Restricted States</div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +36,7 @@
                              <template if:true={x.costDown}>
                                 <lightning-helptext content={costHelpText}></lightning-helptext>
                              </template>
+
                         </th>
                         <td>
                             <div class="slds-truncate" title="Sales Price">
@@ -78,6 +82,17 @@
                                     <lightning-input type="checkbox" name={x.Id} onchange={handleCheck} 
                                     checked={x.Hold_Margin__c}></lightning-input>
                                 </template>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Res Use">
+                                    
+                                    <lightning-input type="text" name={x.Id} value={x.rupStates} readonly></lightning-input>
+                                    <template if:false={x.RUP}>
+                                        <lightning-helptext 
+                                        content="If wrong contact Purchasing NOT IT"
+                                        ></lightning-helptext>
+                                    </template>
                                 </div>
                             </td>
                    </tr>

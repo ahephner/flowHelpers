@@ -88,7 +88,9 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 costDown: configs.costDown, 
                 color:`color: ${configs.color}`, 
                 Hold_Margin__c: configs.holdMargin,
-                Product_Cost__c: configs.cost
+                Product_Cost__c: configs.cost,
+                RUP: item.Product2.Restricted_States__c != undefined? true:false,
+                rupStates: item.Product2.Restricted_States__c != undefined? item.Product2.Restricted_States__c:'None'
             };
             return mappedItem;
         });

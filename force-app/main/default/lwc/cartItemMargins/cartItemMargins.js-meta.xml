@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+	<apiVersion>57.0</apiVersion>
+	<isExposed>true</isExposed>
+	<targets>
+		<target>lightning__FlowScreen</target>
+	</targets>
+	<targetConfigs>
+		<targetConfig targets= "lightning__FlowScreen">
+			<propertyType name="cartItem" extends="SObject" label="Select the CartItem Object"
+				description="Select a sObject" />
+			<property name="cartItemRecords" type="{cartItem[]}" label="Cart Item Records"
+				description="Cart Item Records" />
+			<propertyType name="product" extends="SObject" label="Select the Product Object"
+				description="Select a sObject" />
+			<property name="productRecords" type="{product[]}" label="Product Records"
+				description="Product Records" />
+		</targetConfig>
+	</targetConfigs>
+</LightningComponentBundle>

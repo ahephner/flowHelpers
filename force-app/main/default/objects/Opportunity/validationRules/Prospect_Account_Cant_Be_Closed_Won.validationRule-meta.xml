@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prospect_Account_Cant_Be_Closed_Won</fullName>
+    <active>true</active>
+    <description>If the Account is a Prospect, the Opportunity is unable to be marked as Closed Won</description>
+    <errorConditionFormula>AND(ISPICKVAL(StageName, &apos;Closed Won&apos;), Account.RecordType.Name = &apos;Prospect&apos;, $User.LastName != &apos;Hephner&apos;,
+     $User.LastName != &apos;Sartor&apos;,
+     $User.LastName != &apos;Pruden&apos;)</errorConditionFormula>
+    <errorMessage>This Account is still a Prospect! The Prospect must be converted to a Customer Account before the Opportunity can be Submitted as an Order!</errorMessage>
+</ValidationRule>

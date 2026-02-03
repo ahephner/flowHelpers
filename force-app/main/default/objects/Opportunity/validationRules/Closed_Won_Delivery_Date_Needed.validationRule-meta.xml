@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Won_Delivery_Date_Needed</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+   ISPICKVAL(StageName, &apos;Closed Won&apos;), 
+   ISBLANK( Delivery_Date_s_Requested__c ),
+   RecordType.Name = &apos;CPQ&apos;,
+   Is_Automation_Bypassed__c = FALSE
+)</errorConditionFormula>
+    <errorDisplayField>Delivery_Date_s_Requested__c</errorDisplayField>
+    <errorMessage>You must have a First Requested Delivery Date before you can mark this Opportunity as Closed Won</errorMessage>
+</ValidationRule>

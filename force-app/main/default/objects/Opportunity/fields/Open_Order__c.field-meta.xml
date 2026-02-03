@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Open_Order__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Will show the related Open Order (only if it is still Open, Docs are removed from Salesforce upon posting as Invoice); Started FY25</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Related Open Order (will be blank if Order is no longer Open)</inlineHelpText>
+    <label>Open Order</label>
+    <referenceTo>Open_Order__c</referenceTo>
+    <relationshipLabel>Original Opportunity</relationshipLabel>
+    <relationshipName>Original_Opportunity</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

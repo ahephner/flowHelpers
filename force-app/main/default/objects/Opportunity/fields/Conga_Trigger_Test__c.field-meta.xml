@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Trigger_Test__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(&quot;/apex/APXTConga4__Conga_Composer?ServerURL=&quot;+ $Api.Partner_Server_URL_370 + 
+&quot;&amp;solmgr=1&quot; +
+&quot;&amp;id=&quot; + Id +
+&quot;&amp;queryid=[OppLineItem]0Q_006EAC868745,[OppLineItem2]0Q_007EAC571956,[OppLineItem3]0Q_008EAC377528&quot; +
+&quot;&amp;templateid=a2O2M000009Xt6FUAS&quot; +
+&quot;&amp;congaemailtemplateid=0E_002EAC962221&quot; +
+&quot;&amp;sc0=1&quot; +
+&quot;&amp;ds2=0&quot; +
+&quot;&amp;ds3=1&quot; +
+&quot;&amp;ds4=1&quot; +
+&quot;&amp;ds5=1&quot; +
+&quot;&amp;ds6=1&quot; +
+&quot;&amp;qmode=SendEmail&quot; +
+&quot;&amp;defaultpdf=1&quot; +
+&quot;&amp;fp0=1&quot; +
+&quot;&amp;emailtoid= &quot; +
+&quot;&amp;emailadditionalto=&quot; + IF(ISPICKVAL(Ship_Type__c, &quot;DS&quot;), &quot;dropship@advancedturf.com&quot;, Warehouse_Order_Notification_Group__c) + IF(ISBLANK(Warehouse_Order_Notification_Group__c), &quot;cop@advancedturf.com&quot;, Null) + &quot;,&quot; + Sales_Rep_Email__c +
+&quot;&amp;ofn=Operations PDF - &quot; + Account.Name + &quot; - Quote &quot; + Quote_Number_Text__c +
+&quot;&amp;uf0=1&quot; +
+&quot;&amp;mfts0=Did_Conga_Trigger_Fire__c&quot; +
+&quot;&amp;mftsvalue0=TRUE&quot; + 
+&quot;&amp;SC1=SalesforceFile&quot;, &quot;Trigger Email&quot;)</formula>
+    <label>Conga Trigger - Manual</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

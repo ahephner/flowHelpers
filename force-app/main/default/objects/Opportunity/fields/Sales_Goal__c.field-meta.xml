@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Goal__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Sales Goal associated with this Opportunity</description>
+    <externalId>false</externalId>
+    <label>Sales Goal</label>
+    <referenceTo>Sales_Goal__c</referenceTo>
+    <relationshipLabel>Opportunities</relationshipLabel>
+    <relationshipName>Opportunities</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

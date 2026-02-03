@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Composer_HazMat_BOL</fullName>
+    <availability>online</availability>
+    <description>Originally created by Conga Solution Manager. Date of last use of Update Button from Conga Solution record: https://advancedturf--apxtconga4.vf.force.com/a2M6T000001XxGtUAK
+24-Apr-2023 10:33:34 AM</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>false</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>660</height>
+    <isResizable>false</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>HazMat BOL</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>/apex/APXTConga4__Conga_Composer?SolMgr=1
+&amp;serverUrl={!API.Partner_Server_URL_370}
+&amp;Id={!Opportunity.Id}
+
+&amp;QueryId=[OppLineItem]0Q_006EAC868745,
+[Hazmat]0Q_020EAC826106,
+[ship]0Q_019EAC645985
+
+&amp;TemplateId=0T_031EAC856728,0T_032EAC931101
+
+&amp;CongaEmailTemplateId=0E_009EAC386111
+
+&amp;DefaultPDF=1
+&amp;ds7=11
+&amp;sc0=1
+&amp;sc1=salesforcefile</url>
+    <width>900</width>
+</WebLink>

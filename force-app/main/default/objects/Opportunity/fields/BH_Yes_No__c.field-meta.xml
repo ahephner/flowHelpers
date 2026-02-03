@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BH_Yes_No__c</fullName>
+    <description>Starting EOP 2022 we use this vs the original Bill and Hold check box. Reason being that if the checkbox always has a value of negative. So trying to require user input would be difficult if the order was not bill and hold because the user would say false.</description>
+    <externalId>false</externalId>
+    <label>Bill and Hold?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Yes_No</valueSetName>
+    </valueSet>
+</CustomField>

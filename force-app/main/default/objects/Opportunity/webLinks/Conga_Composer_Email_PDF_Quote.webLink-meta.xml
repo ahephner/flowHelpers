@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Composer_Email_PDF_Quote</fullName>
+    <availability>online</availability>
+    <description>Originally created by Conga Solution Manager. Date of last use of Update Button from Conga Solution record: https://advancedturf--apxtconga4.vf.force.com/a2M2M0000022OopUAE
+03-Mar-2023 12:22:13 PM</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>false</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>660</height>
+    <isResizable>false</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>Email PDF Quote</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>/apex/APXTConga4__Conga_Composer?SolMgr=1
+&amp;serverUrl={!API.Partner_Server_URL_370}
+&amp;Id={!Opportunity.Id}
+
+&amp;QueryId=[OppLineItem]0Q_006EAC868745,
+[OppLineItem2]0Q_007EAC571956,
+[OppLineItem3]0Q_008EAC377528
+
+&amp;TemplateId=0T_020EAC487894
+
+&amp;CongaEmailTemplateId=0E_001EAC219182
+
+&amp;SC0=1
+&amp;DS2=0
+&amp;DS3=1
+&amp;DS4=1
+&amp;DS5=1
+&amp;DS6=1
+&amp;DS7=2
+&amp;DefaultPDF=1
+&amp;FP0=1
+&amp;DC={!IF(OR(ISPICKVAL(Opportunity.Ship_Type__c, &quot;WI&quot;),ISPICKVAL(Opportunity.Ship_Type__c, &quot;REP&quot;),!ISBLANK(Opportunity.Shipping_Address__c)),&quot;0&quot;, &quot;1&quot;)}
+&amp;DCL=Please Save a Shipping Address Before Emailing PDF
+&amp;EmailToId={!Opportunity.ContactId__c}
+&amp;EmailAdditionalTo={!Opportunity.Sales_Rep_Email__c}
+&amp;OFN=Advanced Turf Solutions - {!Opportunity.Account_Name_Text__c} - Quote {!Opportunity.Quote_Number_Text__c}
+&amp;SC1=SalesforceFile
+&amp;UF0=1
+&amp;MFTS0=StageName
+&amp;MFTSValue0={!IF(ISPICKVAL(Opportunity.StageName,&quot;Closed Won&quot;), &quot;Closed Won&quot;, &quot;Quote&quot;)}
+&amp;DS7Preview=1</url>
+    <width>900</width>
+</WebLink>

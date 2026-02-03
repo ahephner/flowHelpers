@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Parts_Order__c</fullName>
+    <description>Indicates the Opportunity is for the 125 Warehouse (Parts or Standard) - used for order notifications</description>
+    <externalId>false</externalId>
+    <formula>OR(CONTAINS( Warehouse__r.Name, &quot;125&quot;),CONTAINS( Warehouse__r.Name, &quot;Parts&quot;))</formula>
+    <label>Parts Order?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

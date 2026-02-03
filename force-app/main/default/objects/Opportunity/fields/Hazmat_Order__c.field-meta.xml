@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hazmat_Order__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Used in flow to notify sales rep via chatter that order has been submitted to warehouse but because the order contained hazmat materials; they were not included on the initial notification.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Used in flow to notify sales rep via chatter that order has been submitted to warehouse but because the order contained hazmat materials; they were not included on the initial notification.</inlineHelpText>
+    <label>Hazmat Order</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

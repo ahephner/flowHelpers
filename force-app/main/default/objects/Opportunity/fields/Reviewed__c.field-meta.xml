@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reviewed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates the Opportunity has been reviewed (CPQ Opportunities except for Drop Ship and 125 / Parts must be reviewed before they are created in Salespad)</description>
+    <externalId>false</externalId>
+    <label>Reviewed</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Won_Address_Needed</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+   ISPICKVAL(StageName, &apos;Closed Won&apos;),
+   RecordType.Name = &apos;CPQ&apos;,
+   ISBLANK(Shipping_Address__c),
+   Is_Automation_Bypassed__c = FALSE,
+   $User.LastName != &apos;Hephner&apos;,
+   $User.LastName != &apos;Pruden&apos;,
+   $User.LastName != &apos;Shelley&apos;,
+   $User.LastName != &apos;Pruden&apos;,
+   NOT(
+      OR(
+         ISPICKVAL(Ship_Type__c, &apos;WI&apos;),
+         ISPICKVAL(Ship_Type__c, &apos;REP&apos;),
+         ISPICKVAL(Ship_Type__c, &apos;WI-EXEMPT&apos;)
+         )
+   )
+)</errorConditionFormula>
+    <errorMessage>You must have a Shipping Address to be able to mark this Opportunity as Closed Won.</errorMessage>
+</ValidationRule>

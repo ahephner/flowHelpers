@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Drop_Ships_105</fullName>
+    <active>true</active>
+    <description>Do not let drop ships out of 105</description>
+    <errorConditionFormula>AND(Warehouse__r.Location_Number__c = &apos;105&apos;, ISPICKVAL(Ship_Type__c  , &apos;DS&apos;), $Profile.Name &lt;&gt; &apos;System Administrator&apos;)</errorConditionFormula>
+    <errorMessage>Drop Ships cant go to 105 location. Please change that location.</errorMessage>
+</ValidationRule>

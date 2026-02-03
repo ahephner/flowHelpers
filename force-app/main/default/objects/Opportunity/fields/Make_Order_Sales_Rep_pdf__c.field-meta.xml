@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Make_Order_Sales_Rep_pdf__c</fullName>
+    <description>Used in Flow: Opportunity: Make Order</description>
+    <externalId>false</externalId>
+    <formula>&quot;&amp;solmgr=1&quot; +
+&quot;&amp;id=&quot; + Id +
+&quot;&amp;queryid=[OppLineItem]0Q_006EAC868745,[Ship]0Q_019EAC645985&quot; +
+&quot;&amp;templateid=0T_032EAC931101&quot; +
+&quot;&amp;sc0=1&quot; +
+&quot;&amp;SC1=salesforcefile&quot; +
+&quot;&amp;CongaEmailTemplateId=0E_002EAC962221&quot; +
+&quot;&amp;DefaultPDF=1&quot; +
+&quot;&amp;emailtoid=&quot;+  OwnerId  +
+&quot;&amp;EmailReplyToId=0052M00000AnqxTQAR&quot; +
+&quot;&amp;ds7=12&quot;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Used in Flow: Opportunity: Make Order</inlineHelpText>
+    <label>Make Order Sales Rep PDF</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

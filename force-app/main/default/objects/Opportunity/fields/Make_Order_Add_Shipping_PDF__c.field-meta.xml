@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Make_Order_Add_Shipping_PDF__c</fullName>
+    <description>Used in Flow: Opportunity: Make Order &amp; Opp: Reviewed by COP</description>
+    <externalId>false</externalId>
+    <formula>&quot;&amp;solmgr=1&quot; +
+&quot;&amp;id=&quot; + Id +
+&quot;&amp;queryid=[OppLineItem]0Q_006EAC868745,[Ship]0Q_019EAC645985&quot; +
+&quot;&amp;templateid=0T_032EAC931101&quot; +
+&quot;&amp;sc0=1&quot; +
+&quot;&amp;SC1=salesforcefile&quot; +
+&quot;&amp;DefaultPDF=1&quot; +
+&quot;&amp;Emailtoid=&quot; +  OwnerId  +
+&quot;&amp;emailcc=&quot; +  Warehouse_Order_Notification_Group__c +&quot;,cop@advancedturf.com&quot; +
+&quot;&amp;EmailReplyToId=0052M00000AnqxTQAR&quot;+
+&quot;&amp;CongaEmailTemplateId=0E_002EAC962221&quot; +
+&quot;&amp;QMode=3&quot; +
+&quot;&amp;DS7=12&quot;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Used in Flow: Opportunity: Make Order &amp; Opp: Reviewed by COP</inlineHelpText>
+    <label>Make Order Add Shipping PDF</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Won</fullName>
+    <active>false</active>
+    <description>DEPRECATED - SPORTS TURF SERVICES: Limit who can mark an opportunity closed won</description>
+    <errorConditionFormula>AND( 
+  NOT(ISCHANGED(StageName)),
+  ISPICKVAL(StageName, &apos;Closed Won&apos;),
+  $User.LastName != &apos;Hephner&apos;,
+  $User.LastName != &apos;Pruden&apos;,
+  $User.LastName != &quot;O&apos;Grady&quot;,
+  $User.Id != &apos;0052M0000095121&apos;
+ )</errorConditionFormula>
+    <errorMessage>Hello, you should not make changes to the sports turf opportunity after closed won. Thank you</errorMessage>
+</ValidationRule>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maint_Water_Source__c</fullName>
+    <externalId>false</externalId>
+    <label>Water Source</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Hose</fullName>
+                <default>false</default>
+                <label>Hose</label>
+            </value>
+            <value>
+                <fullName>Line Dimension</fullName>
+                <default>false</default>
+                <label>Line Dimension</label>
+            </value>
+            <value>
+                <fullName>Water Wagon</fullName>
+                <default>false</default>
+                <label>Water Wagon</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

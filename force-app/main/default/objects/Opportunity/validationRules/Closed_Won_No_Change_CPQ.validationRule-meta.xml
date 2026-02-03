@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Won_No_Change_CPQ</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+      RecordType.DeveloperName = &apos;CPQ&apos;,
+      Added_to_SalesPad__c = True,
+      $User.LastName != &apos;Hephner&apos;,
+      $User.LastName != &apos;Shelley&apos;,
+      $User.LastName != &apos;Vintila&apos;,
+      $User.LastName != &apos;Order Processing&apos;,
+      $User.LastName != &apos;Pruden&apos;,
+      $User.LastName != &quot;O&apos;Grady&quot;, 
+      $User.LastName != &apos;Turf Solutions&apos;,
+      $User.LastName != &apos;Eggeman&apos;,
+      $User.LastName != &apos;Fregien&apos;,
+      $User.LastName != &apos;Cazarez&apos;,
+      $User.LastName != &apos;Cranmer&apos;,
+      $User.LastName != &apos;Heller&apos;,
+      $User.LastName != &apos;Beasley&apos;,
+$User.LastName != &apos;Telfor&apos;,
+      Is_Automation_Bypassed__c = FALSE,
+      $Profile.Name != &apos;ATS Central Order Processing&apos;,
+      $Profile.Name != &apos;System Administrator&apos;
+      )</errorConditionFormula>
+    <errorDisplayField>Account_Customer__c</errorDisplayField>
+    <errorMessage>You cannot edit a Closed Won Opportunity!</errorMessage>
+</ValidationRule>

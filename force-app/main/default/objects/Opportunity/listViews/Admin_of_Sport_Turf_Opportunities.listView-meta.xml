@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Admin_of_Sport_Turf_Opportunities</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Sales_Rep__c</columns>
+    <columns>OPPORTUNITY.CREATED_DATE</columns>
+    <columns>Opportunity_ID__c</columns>
+    <columns>ERP_Quote_Id__c</columns>
+    <columns>CORE.USERS.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Sales_Rep__c</field>
+        <operation>contains</operation>
+        <value>Trexler</value>
+    </filters>
+    <filters>
+        <field>CORE.USERS.ALIAS</field>
+        <operation>contains</operation>
+    </filters>
+    <filters>
+        <field>ACCOUNT.NAME</field>
+        <operation>contains</operation>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>notEqual</operation>
+        <value>Closed Won</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.Customer_Opportunity,Opportunity.Equipment_Demo,Opportunity.Field_Evaluation,Opportunity.Prospective_Opp_New,Opportunity.SGM_Machine,Opportunity.SGM_Parts,Opportunity.Soft_Goods</value>
+    </filters>
+    <label>Admin - of Sport Turf Opportunities</label>
+    <sharedTo>
+        <group>IT_Department</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Reviewed_Sdoc</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Order Reviewed</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR(&apos;/apex/SDOC__SDCreate1&apos;, null,[id=Opportunity.Id, Object=&apos;Opportunity&apos;,doclist=IF( Opportunity.Hazmat_Order__c  = True, &apos;a5LVH0000000cGb2AI&apos; +&apos;,a5LVH0000000cID2AY&apos;+ &apos;,Hazmat BOL&apos;,&apos;a5LVH0000000byr2AA&apos; +&apos;,Opportunity Made Into Order (COPY)&apos;),sendemail=1])}</url>
+</WebLink>

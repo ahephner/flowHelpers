@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Review_On_Hold__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>COP has notified Credit that the Account is On Hold and will await word from them if the Order is approved to move on</description>
+    <externalId>false</externalId>
+    <inlineHelpText>COP has notified Credit that the Account is On Hold and will await word from them if the Order is approved to move on</inlineHelpText>
+    <label>Review On Hold</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

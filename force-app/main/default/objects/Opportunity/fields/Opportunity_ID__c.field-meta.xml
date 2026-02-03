@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity_ID__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Updated by workflow and the same as the ID, for use in SmartConnect to update Opportunity with the SOP number created in GP/SalesPad - used to use this in Salespad but do we need anymore???</description>
+    <externalId>true</externalId>
+    <label>Opportunity ID</label>
+    <length>50</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ATS_Shipping_Schedule__c</fullName>
+    <description>Link to ATS Shipping Schedule in Google Drive</description>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(&quot;https://drive.google.com/file/d/1NMlSRmakkHaI_N0zBqrL8A1HWE145bBf/view&quot;, &quot;Open ATS Shipping Schedule in New Tab&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>ATS Shipping Charges:</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

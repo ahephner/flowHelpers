@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quote_Payment_Terms__c</fullName>
+    <description>Used to show the proper Payment Type on the PDF whether the Account is on Terms, or if the Customer would like to pay a single invoice separately.</description>
+    <externalId>false</externalId>
+    <formula>CASE(Alternate_Pay_Type__c, &quot;COD/CASH&quot;, &quot;COD/CASH&quot;, &quot;COD/CC&quot;, &quot;COD/CCC&quot;, &quot;COD/CK&quot;, &quot;COD/CK&quot;, &quot;THIRD PARTY FINANCING&quot;, &quot;Third Party Financing&quot;, Payment_Type__c)</formula>
+    <label>Quote Payment Terms</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

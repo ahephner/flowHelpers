@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quote_Payment_Terms_GP__c</fullName>
+    <description>Used for sending the Payment Terms to GP.</description>
+    <externalId>false</externalId>
+    <formula>CASE(Alternate_Pay_Type__c, &quot;COD/CASH&quot;, &quot;COD/CASH&quot;, &quot;COD/CC&quot;, &quot;COD/CC&quot;, &quot;COD/CK&quot;, &quot;COD/CK&quot;, &quot;THIRD PARTY FINANCING&quot;, &quot;THIRD PARTY FINANCIN&quot;, Payment_Type__c)</formula>
+    <label>Quote Payment Terms GP</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

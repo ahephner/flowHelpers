@@ -41,6 +41,9 @@
                         <td>
                             <div class="slds-truncate" title="Sales Price">
                                 <p>${x.Product2.Floor_Price__c}</p>
+                                <template if:true={banner}>
+                                <div style="color:red">Below Floor</div>
+                            </template>
                             </div>
                         </td>
                         <td>
@@ -95,6 +98,7 @@
                                     </template>
                                 </div>
                             </td>
+
                    </tr>
                 </template>   
             </tbody>
@@ -103,7 +107,8 @@
             <lightning-button 
                 label="Save Changes"
                 onclick={saveChanges}
-                variant="brand">
+                variant="brand"
+                disabled={btnAccess}>
             </lightning-button>
         </div>
         </div>

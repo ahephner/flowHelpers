@@ -29,6 +29,14 @@ export default class CartItemMargins extends LightningElement {
 		fieldName: 'cartItemName',
 			type: 'text'
 		}, {
+			label: 'Quantity',
+			fieldName: 'qty',
+			type: 'number',
+			cellAttributes: {
+				alignment: 'right'
+			}
+
+		},{
 			label: 'Floor Price',
 			fieldName: 'flrPrice',
 			type: 'currency',
@@ -113,6 +121,7 @@ export default class CartItemMargins extends LightningElement {
 						cartItemName: `${cartItemRecord.Name} ${agency} ${rup} ${mv}`,
 						salesPrice: calculatedSalesPrice,
 						flrPrice: foundProductRecord.Floor_Price__c, 
+						qty: cartItemRecord.Quantity,
 						unitCost: foundProductRecord.Product_Cost__c,
 						marginPerc: 1 - (foundProductRecord.Product_Cost__c / calculatedSalesPrice),
 						marginIcon: undefined,

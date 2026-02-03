@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sport_Turf_Opportunities</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>Target_Start_Date__c</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>OPPORTUNITY.LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Sports_Opp__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Sales_Rep__c</field>
+        <operation>contains</operation>
+    </filters>
+    <filters>
+        <field>CORE.USERS.FIRST_NAME</field>
+        <operation>contains</operation>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>Closed Won</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.NAME</field>
+        <operation>contains</operation>
+    </filters>
+    <filters>
+        <field>ACCOUNT.NAME</field>
+        <operation>contains</operation>
+    </filters>
+    <filters>
+        <field>Job_Type__c</field>
+        <operation>equals</operation>
+        <value>Maintenance,Construction</value>
+    </filters>
+    <label>Sport Turf Opportunities</label>
+    <sharedTo>
+        <group>IT_Department</group>
+        <role>Sales_Manager</role>
+    </sharedTo>
+</ListView>

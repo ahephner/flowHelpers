@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Send_Storage_Agreement_URL__c</fullName>
+    <externalId>false</externalId>
+    <formula>&quot;https://advancedturf.lightning.force.com/apex/APXTConga4__Conga_Composer?ServerURL=&quot; +
+$Api.Partner_Server_URL_370 +
+&quot;&amp;solmgr=1&quot; +
+&quot;&amp;id=&quot; + Account.Id +
+&quot;&amp;templateid=a2O2M000009948k&quot; +
+&quot;&amp;ac0=1&quot; +
+&quot;&amp;ac1=EOP Storage Agreement Sent via CongaSign&quot; +
+&quot;&amp;csvisible=1&quot; +
+&quot;&amp;csroutingtype=PARALLEL&quot; +
+&quot;&amp;uf0=1&quot; +
+&quot;&amp;mfts0=Account.EOP_Storage_Agreement__c&quot; +
+&quot;&amp;mftsvalue0=True&quot; +
+&quot;&amp;ds7=1142&quot; +
+&quot;&amp;csrecipient1=&quot; + Account.Storage_Agreement_Contact__c +
+&quot;&amp;csrecipient2=&quot; + Sales_Rep__r.Salesforce_User__c +
+&quot;&amp;csrole2=cc&quot; +
+&quot;&amp;mfts1=Account.Number_of_Storage_Agreements_Sent__c&quot; +
+&quot;&amp;mftsvalue1=&quot; + TEXT(Account.Next_Number_of_Storage_Agreements_Sent__c) +
+&quot;&amp;ReturnPath=&quot; + Id</formula>
+    <label>Send Storage Agreement URL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>W_O_Scheduled__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This field is updated via the Work Order Scheduled or In Progress Process Builder. It can be used to filter and was created to remove opportunities from the rep calendars. This way if the W.O. is scheduled then this field is marked true and the opportunity is removed from the calendar and the actual work order replaces it</description>
+    <externalId>false</externalId>
+    <label>W.O. Scheduled</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

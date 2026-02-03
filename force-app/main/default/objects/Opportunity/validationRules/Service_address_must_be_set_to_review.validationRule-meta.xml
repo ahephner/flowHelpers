@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_address_must_be_set_to_review</fullName>
+    <active>false</active>
+    <description>Require a service address before submitting for a review</description>
+    <errorConditionFormula>AND(ISPICKVAL( Quote_Stage__c , &apos;Needs Review&apos;), ISBLANK( Service_Address__c ) )</errorConditionFormula>
+    <errorMessage>Service Address is required before requesting review.</errorMessage>
+</ValidationRule>

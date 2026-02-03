@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sports_Opp_Manger__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Sports_Opp__c = True &amp;&amp; ( 
+   $User.LastName = &quot;Hephner&quot; || 
+   $User.LastName = &quot;Pruden&quot;  ||
+   $User.LastName = &quot;O&apos;Grady&quot;  ||
+   $User.LastName = &quot;Mehringer&quot; ||
+   $User.LastName = &quot;Hancock&quot; ||
+    $User.LastName = &quot;Sage&quot;)
+, true, false)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sports Opp Manger?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

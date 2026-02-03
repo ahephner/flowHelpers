@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Won_without_approved_quote</fullName>
+    <active>false</active>
+    <description>Prevent users from close winning sports opp without approved quote.</description>
+    <errorConditionFormula>And(
+ISCHANGED(StageName),
+ISPICKVAL(StageName, &apos;Closed Won&apos;),
+ Quote_Approved__c == false,
+OR(
+RecordType.Name == &apos;Sports Turf&apos;,
+RecordType.Name == &apos;Sports Opp - Construction&apos;,
+RecordType.Name == &apos;Sports Opp - Maintenance&apos;,
+RecordType.Name == &apos;Sports Opp - New&apos;
+)
+
+
+)</errorConditionFormula>
+    <errorMessage>Quote must be approved before close winning opp</errorMessage>
+</ValidationRule>

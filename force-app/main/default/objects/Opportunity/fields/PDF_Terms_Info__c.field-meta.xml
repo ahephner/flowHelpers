@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PDF_Terms_Info__c</fullName>
+    <description>PDF Text that shows EOP Terms if applicable, otherwise selected Pay Type</description>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK( TEXT(EOP_Pay_Type__c) ) = False , &quot;Early Order Terms: &quot; + TEXT( Number_of_Payments__c ) + &quot; Payments.  First Invoice Due &quot; +  TEXT (First_Due_Date__c)  , &quot;Pay Type: &quot; + Quote_Payment_Terms__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>PDF Text that shows EOP Terms if applicable, otherwise selected Pay Type</inlineHelpText>
+    <label>PDF Terms Info</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

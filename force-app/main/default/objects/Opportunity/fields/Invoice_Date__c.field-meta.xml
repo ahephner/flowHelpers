@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_Date__c</fullName>
+    <description>Only required for Early Order, otherwise this will be the same as the Requested Delivery Date</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Only required for Early Order, otherwise this will be the same as the Requested Delivery Date</inlineHelpText>
+    <label>Invoice Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shipping_Charges__c</fullName>
+    <description>Used in Opportunity:Make Order Flow</description>
+    <externalId>false</externalId>
+    <formula>IF(Estimated_Weight__c &gt; 0 &amp;&amp; Estimated_Weight__c &lt;= 200, 12.00,
+IF(Estimated_Weight__c &lt;=1000, 21.00,
+IF(Estimated_Weight__c &lt;=2000, 31.00,
+IF(Estimated_Weight__c &lt;=4000, 41.00,
+IF(Estimated_Weight__c &lt;=6000, 51.00,
+IF(Estimated_Weight__c &lt;=8000, 61.00,
+IF(Estimated_Weight__c &lt;=10000, 71.00,
+IF(Estimated_Weight__c &lt;=12000, 81.00,
+IF(Estimated_Weight__c &lt;=14000, 91.00,
+IF(Estimated_Weight__c &lt;=16000, 101.00,
+IF(Estimated_Weight__c &lt;=18000, 111.00,
+IF(Estimated_Weight__c &lt;=20000, 121.00,
+IF(Estimated_Weight__c &lt;=22000, 131.00,
+IF(Estimated_Weight__c &lt;=24000, 141.00,
+IF(Estimated_Weight__c &lt;=26000, 151.00,
+IF(Estimated_Weight__c &lt;=28000, 161.00,
+IF(Estimated_Weight__c &lt;=30000, 171.00,
+IF(Estimated_Weight__c &lt;=32000, 181.00,
+IF(Estimated_Weight__c &lt;=34000, 191.00,
+IF(Estimated_Weight__c &lt;=36000, 201.00,
+IF(Estimated_Weight__c &lt;=38000, 211.00,
+IF(Estimated_Weight__c &lt;=40000, 221.00,
+IF(Estimated_Weight__c &lt;=42000, 231.00,
+IF(Estimated_Weight__c &lt;=44000, 241.00,0))))))))))))))))))))))))</formula>
+    <inlineHelpText>Used in Opportunity:Make Order Flow</inlineHelpText>
+    <label>Shipping Charges</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

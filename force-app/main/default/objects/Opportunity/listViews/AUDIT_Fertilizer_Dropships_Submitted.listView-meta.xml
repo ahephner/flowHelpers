@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AUDIT_Fertilizer_Dropships_Submitted</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Sales_Rep__c</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Dropship_Preferred_Trailer__c</columns>
+    <columns>Submitted_to_Purchasing__c</columns>
+    <columns>Supplier_Quote_Completed__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>DS_Fertilizer__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.CLOSE_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>8/1/2024</value>
+    </filters>
+    <filters>
+        <field>Submitted_to_Purchasing__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>AUDIT: Fertilizer Dropships Submitted</label>
+    <sharedTo>
+        <group>IT_Department</group>
+        <group>Purchasing_Department</group>
+    </sharedTo>
+</ListView>

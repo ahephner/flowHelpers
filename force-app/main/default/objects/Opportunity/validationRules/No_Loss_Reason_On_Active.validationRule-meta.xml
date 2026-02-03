@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Loss_Reason_On_Active</fullName>
+    <active>true</active>
+    <description>Make sure the rep changes the stage if they are selecting a Loss Reason</description>
+    <errorConditionFormula>AND($Profile.Name &lt;&gt; &apos;System Administrator&apos;,   ISCHANGED(Loss_Reason__c),  TEXT(Loss_Reason__c) &lt;&gt; &quot;&quot;,TEXT(StageName) &lt;&gt; &apos;Closed Lost&apos;)</errorConditionFormula>
+    <errorDisplayField>StageName</errorDisplayField>
+    <errorMessage>Please Change the Stage to &quot;Closed Lost&quot;, or do not enter a &quot;Loss Reason&quot; yet if it is still Active</errorMessage>
+</ValidationRule>

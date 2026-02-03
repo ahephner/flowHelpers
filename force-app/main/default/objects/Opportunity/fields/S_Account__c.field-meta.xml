@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>S_Account__c</fullName>
+    <description>If account for the opportunity is an S account will show banner warning they cannot close win non S account sales</description>
+    <externalId>false</externalId>
+    <formula>IF(Contains(Account.Customer__c, &apos;-S&apos;), True, False)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>S Account?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

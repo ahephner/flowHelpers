@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loss_Reason__c</fullName>
+    <description>ATS would like to require this in the future on Closed Lost Stage (Validation Rule)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Please use if you are using the Stage &quot;Closed Lost&quot; to move this Opportunity off your Active list, but did not &quot;Win&quot;</inlineHelpText>
+    <label>Loss Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Lost to Competitor</fullName>
+                <default>false</default>
+                <label>Lost to Competitor</label>
+            </value>
+            <value>
+                <fullName>Lost Bid</fullName>
+                <default>false</default>
+                <label>Lost Bid</label>
+            </value>
+            <value>
+                <fullName>No Budget / Lost Funding</fullName>
+                <default>false</default>
+                <label>No Budget / Lost Funding</label>
+            </value>
+            <value>
+                <fullName>No Decision / Non-Responsive</fullName>
+                <default>false</default>
+                <label>No Decision / Non-Responsive</label>
+            </value>
+            <value>
+                <fullName>Price Only</fullName>
+                <default>false</default>
+                <label>Price Only</label>
+            </value>
+            <value>
+                <fullName>Expired Quote</fullName>
+                <default>false</default>
+                <label>Expired Quote</label>
+            </value>
+            <value>
+                <fullName>Scheduling Conflict</fullName>
+                <default>false</default>
+                <label>Scheduling Conflict</label>
+            </value>
+            <value>
+                <fullName>Chose Other Opportunity</fullName>
+                <default>false</default>
+                <label>Chose Other ATS Opportunity</label>
+            </value>
+            <value>
+                <fullName>Delayed/Potential Future</fullName>
+                <default>false</default>
+                <label>Delayed / Potential Future</label>
+            </value>
+            <value>
+                <fullName>Inventory or Backorder</fullName>
+                <default>false</default>
+                <label>Inventory or Backorder</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

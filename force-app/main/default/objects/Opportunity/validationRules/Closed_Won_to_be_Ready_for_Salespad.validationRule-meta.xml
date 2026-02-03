@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Won_to_be_Ready_for_Salespad</fullName>
+    <active>false</active>
+    <errorConditionFormula>Ready_for_Salespad__c = True &amp;&amp;  TEXT(StageName) != &apos;Closed Won&apos;</errorConditionFormula>
+    <errorDisplayField>Ready_for_Salespad__c</errorDisplayField>
+    <errorMessage>Only &quot;Closed - Won&quot; Opportunities can be Ready for Salespad</errorMessage>
+</ValidationRule>

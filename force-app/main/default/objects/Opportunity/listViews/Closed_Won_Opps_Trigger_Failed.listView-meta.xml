@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Won_Opps_Trigger_Failed</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Sales_Rep__c</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>Quote_Number__c</columns>
+    <columns>Did_Conga_Trigger_Fire__c</columns>
+    <columns>OPPORTUNITY.LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Opportunity.CPQ</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.STAGE_NAME</field>
+        <operation>equals</operation>
+        <value>Closed Won</value>
+    </filters>
+    <filters>
+        <field>OPPORTUNITY.CLOSE_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>9/14/2022</value>
+    </filters>
+    <label>Closed Won Opps - Trigger Status</label>
+    <sharedTo>
+        <group>IT_Department</group>
+    </sharedTo>
+</ListView>

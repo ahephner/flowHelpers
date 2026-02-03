@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Generate_PDF_Quote_Sdoc</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Print or Email PDF Quote</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>{!URLFOR(&apos;/apex/SDOC__SDCreate1&apos;, null,[id=Opportunity.Id, Object=&apos;Opportunity&apos;,doclist=&apos;a5LVH0000000oJN2AY&apos;+&apos;,Generate Quote (Customer Facing)&apos;])}</url>
+</WebLink>

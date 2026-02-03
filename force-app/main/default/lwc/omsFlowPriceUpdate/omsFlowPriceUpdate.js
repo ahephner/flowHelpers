@@ -24,6 +24,8 @@ export default class OmsFlowPriceUpdate extends LightningElement {
     loading = true; 
     helpText = `Price Book Legend: National = Purple, Customer = Green, Group = Orange, Corporate = Blue, Standard = Black`
     costHelpText=`Last Paid Price don't change`; 
+    btnAccess = false
+    banner = false; 
     @api
     get shopCartId(){
         return this.cartId || '';
@@ -152,7 +154,7 @@ export default class OmsFlowPriceUpdate extends LightningElement {
     // method to update price based off user input that will update margin put a setTimeOut on 
     updatePrice(event) {
         const id = event.target.dataset.id;
-        const value = event.target.value;
+        const value = Number(event.target.value);
         console.log(`Price update triggered - ID: ${id}, New Value: ${value}`);
     
         // Clear any existing timeout
@@ -164,7 +166,13 @@ export default class OmsFlowPriceUpdate extends LightningElement {
         this.updatePriceTimeout = setTimeout(() => {
             console.log(`Updating price after timeout - ID: ${id}, New Value: ${value}`);
             const updatedItem = this.cartItems.find(item => item.Id === id);
-            if (updatedItem) {
+            if(updatedItem.Product2.Floor_Price__c>parseFloat(value)){
+                this.btnAccess = true; 
+                this.banner = true; 
+
+            }else if (updatedItem) {
+                this.btnAccess = false; 
+                this.banner = false; 
                 updatedItem.SalesPrice = parseFloat(value);
                 updatedItem.margin = this.calculateMargin(updatedItem.SalesPrice, updatedItem.Product2.Product_Cost__c);
                 console.log(`Updated item after price change: ${JSON.stringify(updatedItem, null, 2)}`);
@@ -194,9 +202,18 @@ export default class OmsFlowPriceUpdate extends LightningElement {
                 const newMargin = parseFloat(value) / 100; // Convert percentage to decimal
                 const cost = updatedItem.Product2.Product_Cost__c;
                 updatedItem.SalesPrice = roundNum(cost / (1 - newMargin), 2);
-                updatedItem.margin = parseFloat(value);
+                if(updatedItem.SalesPrice < updatedItem.Product2.Floor_Price__c){
+                    this.btnAccess = true; 
+                    this.banner = true; 
+                }else{
+                    this.btnAccess = false; 
+                    this.banner = false; 
+                    updatedItem.margin = parseFloat(value);
+                    this.cartItems = [...this.cartItems];
+
+                }
+                
                 //console.log(`Updated item after margin change: ${JSON.stringify(updatedItem, null, 2)}`);
-                this.cartItems = [...this.cartItems];
             } else {
                 console.warn(`Item with ID ${id} not found`);
             }

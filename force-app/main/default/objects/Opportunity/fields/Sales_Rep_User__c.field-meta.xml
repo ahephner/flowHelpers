@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Rep_User__c</fullName>
+    <description>Used to allow Sales Reps to see all Opportunities in which they are listed as the Sales Rep</description>
+    <externalId>false</externalId>
+    <formula>OR(Sales_Rep__r.Salesforce_User__c = $User.Id, Owner.Id = $User.Id,  Account.Associate_Rep__r.Salesforce_User__c = $User.Id)</formula>
+    <label>Sales Rep User</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Generate_Hazmat_URL__c</fullName>
+    <externalId>false</externalId>
+    <formula>&quot;https://advancedturf.lightning.force.com/apex/APXTConga4__Conga_Composer?ServerURL=&quot;+ $Api.Partner_Server_URL_370 + Generate_Hazmat_PDF__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Generate Hazmat URL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Won_Ship_Type_Needed</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+   ISPICKVAL(StageName, &apos;Closed Won&apos;),
+   ISBLANK(TEXT(Ship_Type__c)),
+   RecordType.Name = &apos;CPQ&apos;,
+   Is_Automation_Bypassed__c = FALSE
+)</errorConditionFormula>
+    <errorDisplayField>Ship_Type__c</errorDisplayField>
+    <errorMessage>You must select a Ship Type before you can mark this Opportunity as Closed Won</errorMessage>
+</ValidationRule>

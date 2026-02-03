@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>if_PONumber_then_Contact_Required</fullName>
+    <active>false</active>
+    <description>If PO # is filled in then the Contact is required</description>
+    <errorConditionFormula>AND(
+				NOT(ISBLANK(Customer_PO__c)),
+    ISBLANK( Contact__c )
+)</errorConditionFormula>
+    <errorMessage>Please enter in a Contact.</errorMessage>
+</ValidationRule>

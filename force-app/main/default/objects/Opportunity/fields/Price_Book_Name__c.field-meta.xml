@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Price_Book_Name__c</fullName>
+    <description>Show the Price Book Name of the Linked Price Book for this Opp</description>
+    <externalId>false</externalId>
+    <formula>Pricebook2.Name</formula>
+    <label>Price Book Name</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

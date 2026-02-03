@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PO_number_Closed_Won</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(PO_Override__c,
+				false,
+				AND(
+								OR(
+												RecordType.DeveloperName = &apos;Sports_Opp_Construction&apos;,
+		          RecordType.DeveloperName = &apos;Sports_Opp_Maintenance&apos;
+								),
+				 ISPICKVAL(StageName, &apos;Closed Won&apos;),
+				 ISBLANK(Customer_PO__c)
+    )
+	)</errorConditionFormula>
+    <errorMessage>You must have a PO number before you can close win this Opportunity. If you do not have a PO, please contact your Administrators.</errorMessage>
+</ValidationRule>

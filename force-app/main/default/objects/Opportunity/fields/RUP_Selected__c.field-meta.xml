@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RUP_Selected__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Will be set by CPQ. Will use to trigger flows/check against when making to order</description>
+    <externalId>false</externalId>
+    <label>RUP Selected?</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

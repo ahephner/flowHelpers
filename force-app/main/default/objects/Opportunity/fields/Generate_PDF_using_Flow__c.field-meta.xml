@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Generate_PDF_using_Flow__c</fullName>
+    <externalId>false</externalId>
+    <formula>&quot;&amp;solmgr=1&quot; +
+&quot;&amp;id=&quot; + Id +
+&quot;&amp;queryid=[OppLineItem]0Q_006EAC868745,[OppLineItem2]0Q_007EAC571956,[OppLineItem3]0Q_008EAC377528&quot; +
+&quot;&amp;templateid=0T_020EAC487894&quot; +
+&quot;&amp;sc0=1&quot; +
+&quot;&amp;ds2=1&quot; +
+&quot;&amp;ds3=1&quot; +
+&quot;&amp;ds4=1&quot; +
+&quot;&amp;ds5=1&quot; +
+&quot;&amp;ds6=1&quot; +
+&quot;&amp;ds7=11&quot; +
+&quot;&amp;defaultpdf=1&quot; +
+&quot;&amp;fp0=1&quot; +
+&quot;&amp;ac0=1&quot; +
+&quot;&amp;BML=On Mobile, you must click &apos;Return to Opportunity&apos; once the merge process has completed&quot; +
+&quot;&amp;ofn=Advanced Turf Solutions - &quot; + Account_Name_Text__c + &quot; - Quote &quot; + Quote_Number_Text__c +
+&quot;&amp;sf1=1&quot;</formula>
+    <label>Generate PDF using Flow</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
